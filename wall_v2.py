@@ -11,7 +11,7 @@ def variables(TIME, SCORE, LIVES):
     global lives
     lives = LIVES
 
-
+    
 # MAIN SETTING = variables("3:00", 0, 3)
 
 def screen_set(WIDTH, HEIGHT):
@@ -65,6 +65,7 @@ def screen_lines(color, line_size):
 screen.fill((0, 0, 0))
 
 # ORDER OF USAGE:
+
 # variables -> screen_set -> (inside game loop) -> screen.fill - > hud -> screen lines
 variables("3:00", 0, 3)
 screen_set(1000, 600)
