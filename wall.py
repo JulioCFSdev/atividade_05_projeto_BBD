@@ -30,8 +30,8 @@ def bg_run(image_file, pos, display):
 def hud(display, size, score_value, life_value, time_value, pos_money_icon_var, pos_score_value_var,
         pos_life_icon_var, pos_lives_value_var, pos_time_icon_var, pos_time_value_var):
     WHITE = (255, 255, 255)
-    font = pygame.font.Font("EmojiOneColor.otf", 34)
-    font2 = pygame.font.Font("DSEG14Classic-Bold.ttf", 34)
+    font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
+    font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
     text = font.render("💰", True, WHITE)
     display.blit(text, (size - (size / pos_money_icon_var), 1))  # 1.05
     text2 = font2.render(":  " + str(score_value), True, WHITE)

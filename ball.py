@@ -3,11 +3,9 @@ import pygame
 
 class Ball(pygame.sprite.Sprite):
 
-    def __init__(self, color):
-        # calling the parent class
-        super().__init__()
+    def __init__(self):
         # color
-        self.color = color
+        self.color = (255, 255, 255)
         # ball size
         self.width = 20
         self.height = 20
@@ -20,6 +18,6 @@ class Ball(pygame.sprite.Sprite):
         pygame.draw.rect(self.image, self.color, [0, 0, self.width, self.height])
 
     # ball movement function
-    def move(self):
+    def ball_move(self):
         self.rect.x += self.dx
         self.rect.y += self.dy
