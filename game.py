@@ -1,3 +1,4 @@
+from turtle import Screen
 import pygame
 import wall 
 import ball
@@ -14,7 +15,7 @@ class BlocksAge:
         self.lives = 3
         self.time = "3:00"
         self.clock = pygame.time.Clock()
-
+        
         self.player_width = 100
         self.player_heigth = 20
         self.player_x = 350
@@ -44,7 +45,7 @@ class BlocksAge:
     # Mechanics and world rules
     def game_logic(self):
         bola = ball.Ball() 
-        bola.move() # movement ball
+        bola.move_ball() # movement ball
         # movement paddler
         # collision ball/paddler
         # colision ball/blocks
