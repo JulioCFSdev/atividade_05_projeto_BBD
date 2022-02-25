@@ -1,23 +1,17 @@
 import pygame
 
-class Ball(pygame.sprite.Sprite):
+def draw_ball(screen, white):
+    # ball size
+    ball_width = 20
+    ball_height = 20
+    ball_x = 500
+    ball_y = 400
+    # image surface and rectangle
+    ball = pygame.Rect(ball_x, ball_y, ball_width, ball_height)
+    pygame.draw.ellipse(screen, white, ball)
+    trator = ball.x 
 
-    def __init__(self):
-        super().__init__()
-        # ball size
-        self.width = 20
-        self.height = 20
-        self.dx = 1
-        self.dy = 1
-        # image surface and rectangle
-        self.ball = pygame.Rect(500, 400, 20, 20)
-        self.image = pygame.Surface([self.width, self.height])
-        self.rect = self.image.get_rect()
-
-    def draw_ball(self, color, screen):
-        pygame.draw.rect(screen, color, self.ball)
-
+def move_ball(ball_x, ball_y, ball_dx, ball_dy):
     # ball movement function
-    def move_ball(self):
-        self.ball.x += self.dx
-        self.ball.y += self.dy
+    ball_x += ball_dx
+    ball_y += ball_dy
