@@ -59,6 +59,7 @@ class BlocksAge:
         bola = ball.Ball()
 
         # draw screen
+        wall.bg_run("wall_dependencies/bg_test.png", [0,0], self.screen)
         wall.hud(self.screen, self.width, self.score, self.lives, self.time, 1.05, 1.15, 2.35, 2, 4, 5.5)
         wall.screen_lines(self.screen, (255, 0, 255), self.width, self.height, 12)
 
