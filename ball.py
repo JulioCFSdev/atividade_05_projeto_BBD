@@ -1,12 +1,15 @@
+from distutils.command.config import config
 import pygame
+from config import Config
+conf = Config()
 
 
 def create_ball():
-    return pygame.Rect(500, 400, 20, 20)
+    return pygame.Rect(conf.ball_x_init, conf.ball_y_init, conf.ball_width, conf.ball_heigth)
 
 
-def draw_ball(screen, color, ball):
-    pygame.draw.rect(screen, color, ball)
+def draw_ball(screen, ball):
+    pygame.draw.ellipse(screen, conf.white, ball)
 
 
 def move_ball(ball, ball_dx, ball_dy):
@@ -20,40 +23,40 @@ def ball_velocity(ball_dx, ball_dy):
 
 # left wall collision
 def left_wall_collision(ball):
-    if ball.x < 6:
-        return -1
+    if ball.x < conf.tresh_left_wall:
+        return conf.reverse_speed
     else:
-        return 1
+        return conf.normal_speed
 
 
 # right wall collision
 def right_wall_collision(ball):
-    if ball.x + 20 + 6 > 1000:
-        return -1
+    if ball.x + conf.tresh_right_wall > conf.screen_width:
+        return conf.reverse_speed
     else:
-        return 1
+        return conf.normal_speed
 
 
 # lower wall collision
 def lower_wall_collision(ball):
-    if ball.y + 20 > 800:
-        ball.x = 500
-        ball.y = 400
-        return -1
+    if ball.y + conf.tresh_lower_wall > conf.screen_height:
+        ball.x = conf.ball_x_init
+        ball.y = conf.ball_y_init
+        return conf.reverse_speed
     else:
-        return 1
+        return conf.normal_speed
 
 
 # upper wall collision
 def upper_wall_collision(ball):
-    if ball.y < 58:
-        return -1
+    if ball.y < conf.tresh_upper_wall:
+        return conf.reverse_speed
     else:
-        return 1
+        return conf.normal_speed
 
 
 def paddler_collision(ball, paddler):
-    if paddler.rect.x < ball.x < paddler.rect.x + 110 and paddler.rect.y < ball.y + 20 < paddler.rect.y + 10:
-        return -1
+    if paddler.rect.x < ball.x < paddler.rect.x + conf.player_width and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+        return conf.reverse_speed
     else:
-        return 1
+        return conf.normal_speed

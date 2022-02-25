@@ -10,11 +10,11 @@ class Config:
         self.white = (255, 255, 255)
         self.pink = '#9957CD'
         # Ball dimension values
-        self.player_width = 20
-        self.player_heigth = 20
+        self.ball_width = 20
+        self.ball_heigth = 20
         # Ball initial coordinates values
-        self.player_x_init = 500
-        self.player_y_init = 400
+        self.ball_x_init = 500
+        self.ball_y_init = 400
         # Player dimension values
         self.player_width = 110
         self.player_heigth = 20
@@ -23,4 +23,13 @@ class Config:
         self.player_y = 650
         # Player speed
         self.speed = 10
+        # Ball speed controler
+        self.reverse_speed = -1
+        self.normal_speed = 1
+        # Parameter values ​​for collisions
+        self.tresh_lower_wall = 20
+        self.tresh_right_wall = 26
+        self.tresh_left_wall = 6
+        self.tresh_upper_wall = 58
+
         

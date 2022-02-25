@@ -3,6 +3,7 @@ import wall
 import ball
 import player
 from config import Config
+conf = Config()
 
 
 # Class to start our game
@@ -58,7 +59,6 @@ class BlocksAge:
         # collision ball/paddler
         self.bola_velocity[1] *= ball.paddler_collision(self.bola, self.paddler)
         # collision ball/blocks
-        # collision ball/wall (left, right, up)
         # left wall collision
         self.bola_velocity[0] *= ball.left_wall_collision(self.bola)
         # right wall collision
@@ -78,7 +78,7 @@ class BlocksAge:
         wall.screen_lines(self.screen, (255, 0, 255), self.width, self.height, 12)
 
         # draw ball
-        ball.draw_ball(self.screen, self.white, self.bola)
+        ball.draw_ball(self.screen, self.bola)
         # draw paddler
         self.paddler.draw(self.screen, self.pink)
         # draw blocks
