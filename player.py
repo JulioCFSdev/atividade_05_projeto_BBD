@@ -30,8 +30,3 @@ class Player():
     def draw(self, screen, color):
         pygame.draw.rect(screen, color, self.rect)
 
-# create player
-player_1 = Player()
-
-clock = pygame.time.Clock()
-fps = 60

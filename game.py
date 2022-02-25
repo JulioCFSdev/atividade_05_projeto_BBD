@@ -2,6 +2,7 @@ import pygame
 import wall 
 import ball
 import player
+from config import Config
 
 # Class to start our game
 class BlocksAge:
