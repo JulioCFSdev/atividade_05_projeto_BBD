@@ -1,23 +1,16 @@
 import pygame
 
-class Ball(pygame.sprite.Sprite):
 
-    def __init__(self):
-        super().__init__()
-        # ball size
-        self.width = 20
-        self.height = 20
-        self.dx = 1
-        self.dy = 1
-        # image surface and rectangle
-        self.ball = pygame.Rect(500, 400, 20, 20)
-        self.image = pygame.Surface([self.width, self.height])
-        self.rect = self.image.get_rect()
+def create_ball():
+    return pygame.Rect(500, 400, 20, 20)
 
-    def draw_ball(self, color, screen):
-        pygame.draw.rect(screen, color, self.ball)
 
-    # ball movement function
-    def move_ball(self):
-        self.ball.x += self.dx
-        self.ball.y += self.dy
+def draw_ball(screen, color, ball):
+    pygame.draw.rect(screen, color, ball)
+
+
+def move_ball(ball):
+    ball_dx = 1
+    ball_dy = 1
+    ball.x += ball_dx
+    ball.y += ball_dy
