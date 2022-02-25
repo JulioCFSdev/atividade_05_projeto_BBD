@@ -5,9 +5,21 @@ class Config:
         self.screen_width = 1000
         self.screen_height = 800
         self.size = (self.screen_width, self.screen_height)
+        # Background
+        self.bg_name = "Blocks Age"
         self.coord_bg = [0, 0]
+        # Icon and character position constants
+        self.pos_money = 1.05
+        self.pos_score = 1.15
+        self.pos_life_icon = 2.35
+        self.pos_life_var = 2
+        self.pos_time_icon = 4
+        self.pos_time_value = 5.5
+        # Line size on sides and top
+        self.line_size = 12
         # Values ​​to assign colors
         self.white = (255, 255, 255)
+        self.black = (0, 0, 0)
         self.pink = '#9957CD'
         # Ball dimension values
         self.ball_width = 20
@@ -23,6 +35,9 @@ class Config:
         self.player_y = 650
         # Player speed
         self.speed = 10
+        # Ball speed
+        self.ball_speed_x = 3
+        self.ball_speed_y = 3
         # Ball speed controler
         self.reverse_speed = -1
         self.normal_speed = 1
@@ -31,5 +46,7 @@ class Config:
         self.tresh_right_wall = 26
         self.tresh_left_wall = 6
         self.tresh_upper_wall = 58
+        # Frames por second value
+        self.fps = 60
 
         
