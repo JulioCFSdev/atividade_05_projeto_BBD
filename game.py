@@ -1,7 +1,7 @@
 import pygame
-import wall
+import wall 
 import ball
-
+import player
 
 # Class to start our game
 class BlocksAge:
@@ -11,15 +11,16 @@ class BlocksAge:
         self.width = 1000
         self.height = 800
         self.white = (255, 255, 255)
+        self.pink = '#9957CD'
         self.score = 0
         self.lives = 3
         self.time = "3:00"
         self.clock = pygame.time.Clock()
-
+        
         self.bola = ball.create_ball()
-
+        self.paddler = player.Player()
         self.player_width = 100
-        self.player_height = 20
+        self.player_heigth = 20
         self.player_x = 350
         self.player_y = 650
 
@@ -35,14 +36,11 @@ class BlocksAge:
             self.game_logic()
             self.draw()
 
-<<<<<<< HEAD
             pygame.display.flip()
             pygame.display.update()
             self.clock.tick(60)
 
 
-=======
->>>>>>> 077bb90c3893fc22d23b1c5e0d12e5801c3791be
     # keyboard inputs
     def handle_input(self):
         for event in pygame.event.get():
@@ -51,44 +49,30 @@ class BlocksAge:
         # Keywords paddler
         # Keywords pause(?)
 
+
     # Mechanics and world rules
     def game_logic(self):
-<<<<<<< HEAD
-        ball = pygame.Rect(500, 400, 20, 20)
-        ball.move_ball(ball.x, ball.y, ball_dx=2, ball_dy=2)
-        pass
-        # movement ball
-=======
-        ball.move_ball(self.bola)  # movement ball
->>>>>>> 077bb90c3893fc22d23b1c5e0d12e5801c3791be
-        # movement paddler
+        ball.move_ball(self.bola) # movement ball
+        self.paddler.move() # movement paddler
         # collision ball/paddler
         # colision ball/blocks
         # colision ball/wall (left, right, up)
         # death point - (collision ball/wall down)
+
 
     # Drawing the screen and its factors
     def draw(self):
         self.screen.fill((0, 0, 0))
 
         # draw screen
-        wall.bg_run("wall_dependencies/bg_test.png", [0, 0], self.screen)
+        wall.bg_run("wall_dependencies/bg_test.png", [0,0], self.screen)
         wall.hud(self.screen, self.width, self.score, self.lives, self.time, 1.05, 1.15, 2.35, 2, 4, 5.5)
         wall.screen_lines(self.screen, (255, 0, 255), self.width, self.height, 12)
-        ball.draw_ball(self.screen, self.white)
 
         # draw ball
-<<<<<<< HEAD
-        # draw paddler
-        # draw blocks
-        # draw power-ups (?)
-=======
         ball.draw_ball(self.screen, self.white, self.bola)
-
         # draw paddler
+        self.paddler.draw(self.screen, self.pink)
         # draw blocks
         # draw power-ups (?)
-
-        pygame.display.flip()
->>>>>>> 077bb90c3893fc22d23b1c5e0d12e5801c3791be
 

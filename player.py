@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from wall_v1 import screen
 
 # player paddle's color
 PINK = '#9957CD'
@@ -28,8 +27,8 @@ class Player():
         if self.rect.right >= 800:
             self.rect.right = 800
 
-    def draw(self):
-        pygame.draw.rect(screen, PINK, self.rect)
+    def draw(self, screen, color):
+        pygame.draw.rect(screen, color, self.rect)
 
 # create player
 player_1 = Player()
