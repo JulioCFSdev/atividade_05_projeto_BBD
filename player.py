@@ -1,28 +1,38 @@
 import pygame
+from pygame.locals import *
+from wall_v1 import screen
 
-WHITE = (255, 255, 255)
+# player paddle's color
+PINK = '#9957CD'
 
+# player class
+class Player():
+    def __init__(self):
+        self.height = 20
+        self.width = 110
+        self.x = 390
+        self.y = 650
+        self.speed = 10
+        self.rect = Rect(self.x, self.y, self.width, self.height)
+        self.direction = 0
 
-width = 800
-heigth = 720
+    def move(self):
+        self.direction = 0
+        key = pygame.key.get_pressed()
+        if key[pygame.K_LEFT] and self.rect.left > 0:
+            self.rect.x -= self.speed
+            self.direction = -1
+        if key[pygame.K_RIGHT]:
+            self.rect.x += self.speed
+            self.direction = 1
+        if self.rect.right >= 800:
+            self.rect.right = 800
 
-x = 350
-y = 650
+    def draw(self):
+        pygame.draw.rect(screen, PINK, self.rect)
 
-player_width = 100
-player_heigth = 20
+# create player
+player_1 = Player()
 
-# while True:
-
-    '''if pygame.key.get_pressed()[pygame.K_LEFT]:
-        x -= 0.5
-    if pygame.key.get_pressed()[pygame.K_RIGHT]:
-        x += 0.5
-
-    if x <= 0:
-        x = 0
-    if x >= width - player_width:
-        x = width - player_width
-
-
-    player = pygame.draw.rect(screen, WHITE, (x, y, player_width, player_heigth))'''
+clock = pygame.time.Clock()
+fps = 60
