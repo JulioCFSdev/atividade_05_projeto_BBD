@@ -21,6 +21,7 @@ class Config:
         self.white = (255, 255, 255)
         self.black = (0, 0, 0)
         self.pink = '#9957CD'
+        self.red = (139, 0, 0)
         # Ball dimension values
         self.ball_width = 20
         self.ball_heigth = 20
