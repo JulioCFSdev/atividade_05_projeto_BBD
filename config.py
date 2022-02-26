@@ -17,6 +17,9 @@ class Config:
         self.pos_time_value = 5.5
         # Line size on sides and top
         self.line_size = 12
+        # Time related values
+        self.time_text = '180'.rjust(3)
+        self.time_counter = 180
         # Values ​​to assign colors
         self.white = (255, 255, 255)
         self.black = (0, 0, 0)
@@ -28,6 +31,12 @@ class Config:
         # Ball initial coordinates values
         self.ball_x_init = 500
         self.ball_y_init = 400
+        self.row_bricks = 14
+        self.col_bricks = 31
+        self.block_width = 40
+        self.block_height = 20
+        self.block_individual = []
+        self.block_list = []
         # Player dimension values
         self.player_width = 110
         self.player_heigth = 20
