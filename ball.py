@@ -55,8 +55,23 @@ def upper_wall_collision(ball):
         return conf.normal_speed
 
 
-def paddler_collision(ball, paddler):
-    if paddler.rect.x < ball.x < paddler.rect.x + conf.player_width and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
-        return conf.reverse_speed
+def paddler_collision(ball, velocity,paddler):
+    # velocity A left
+    if paddler.rect.x < ball.x < paddler.rect.x + 30 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+        return [-5, -3]
+    # velocitye A right
+    elif paddler.rect.x + 80 < ball.x < paddler.rect.x + 110 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+        return [5, -3]
+    # velocity B left
+    elif paddler.rect.x + 30 < ball.x < paddler.rect.x + 50 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+        return [-3, -3]
+    # velocity B left
+    elif paddler.rect.x + 60 < ball.x < paddler.rect.x + 80 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+        return [3, -3]
+    # velocity C
+    elif paddler.rect.x + 50 < ball.x < paddler.rect.x + 60 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+        return [0, -3]
+    # no collision
     else:
-        return conf.normal_speed
+        return velocity
+
