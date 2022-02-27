@@ -25,12 +25,16 @@ class Config:
         self.black = (0, 0, 0)
         self.pink = '#9957CD'
         self.red = (139, 0, 0)
+        self.blue = (63, 72, 204)
+        self.green = (85, 212, 54)
+        self.yellow = (255, 242, 0)
         # Ball dimension values
         self.ball_width = 20
         self.ball_heigth = 20
         # Ball initial coordinates values
         self.ball_x_init = 500
         self.ball_y_init = 400
+        # Block values (Coluns and rows, dimensions, list)
         self.row_bricks = 10
         self.col_bricks = 19
         self.block_width = 50
@@ -57,6 +61,6 @@ class Config:
         self.tresh_left_wall = 6
         self.tresh_upper_wall = 58
         # Frames por second value
-        self.fps = 60
+        self.fps = 120
 
         
