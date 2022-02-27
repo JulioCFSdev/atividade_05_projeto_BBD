@@ -31,10 +31,10 @@ class Config:
         # Ball initial coordinates values
         self.ball_x_init = 500
         self.ball_y_init = 400
-        self.row_bricks = 14
-        self.col_bricks = 31
-        self.block_width = 40
-        self.block_height = 20
+        self.row_bricks = 10
+        self.col_bricks = 19
+        self.block_width = 50
+        self.block_height = 25
         self.block_individual = []
         self.block_list = []
         # Player dimension values

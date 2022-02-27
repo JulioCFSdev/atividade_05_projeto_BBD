@@ -7,13 +7,13 @@ def create_wall():
 
     for row in range(conf.row_bricks):
         for col in range(conf.col_bricks):
-            block_x = col * conf.col_bricks + 10
-            block_y = row * conf.row_bricks + 100
+            block_x = col * conf.block_width + 10
+            block_y = row * conf.block_height + 100
 
             score = 500
 
             block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
-            conf.block_individual = [block, conf.pink ,score]
+            conf.block_individual = [block, conf.red ,score]
             conf.block_list.append(conf.block_individual)
 
 def draw_bricks(screen):
