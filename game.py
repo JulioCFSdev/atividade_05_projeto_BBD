@@ -62,6 +62,7 @@ class EldenBlocks:
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler)
         # collision ball/blocks
+        self.ball_velocity = bricks.brick_collision(self.ball, self.ball_velocity[0], self.ball_velocity[1])
         # left wall collision
         self.ball_velocity[0] *= ball.left_wall_collision(self.ball)
         # right wall collision

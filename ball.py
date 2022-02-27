@@ -1,5 +1,6 @@
 from distutils.command.config import config
 import pygame
+import pygame.locals
 from config import Config
 conf = Config()
 
@@ -81,22 +82,3 @@ def paddler_collision(ball, velocity, paddler):
         return velocity
 
 
-def brick_collision(ball, velocity_0, velocity_1):
-    for block in conf.block_list:
-        if ball.colliderect(block[0]):
-            # checking the collision side
-            print('teste colisão')
-            # top collision
-            if abs(block[0].rect.y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
-                velocity_1 *= -1
-            # bottom collision
-            elif abs((block[0].rect.y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
-                velocity_1 *= -1
-            # right collision
-            elif abs(block[0].rect.x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
-                velocity_0 *= -1
-            # left collision
-            elif abs((block[0].rect.x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
-                velocity_0 *= -1
-            conf.block_list.remove(block)
-    return [velocity_0, velocity_1]
