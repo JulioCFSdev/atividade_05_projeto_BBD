@@ -55,23 +55,48 @@ def upper_wall_collision(ball):
         return conf.normal_speed
 
 
-def paddler_collision(ball, velocity,paddler):
+def paddler_collision(ball, velocity, paddler):
     # velocity A left
-    if paddler.rect.x < ball.x < paddler.rect.x + 30 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+    if paddler.rect.x < ball.x + conf.ball_width < paddler.rect.x + 30 and \
+            paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
         return [-5, -3]
-    # velocitye A right
-    elif paddler.rect.x + 80 < ball.x < paddler.rect.x + 110 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+    # velocity A right
+    elif paddler.rect.x + 80 < ball.x < paddler.rect.x + 110 and \
+            paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
         return [5, -3]
     # velocity B left
-    elif paddler.rect.x + 30 < ball.x < paddler.rect.x + 50 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+    elif paddler.rect.x + 30 < ball.x < paddler.rect.x + 50 and \
+            paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
         return [-3, -3]
-    # velocity B left
-    elif paddler.rect.x + 60 < ball.x < paddler.rect.x + 80 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+    # velocity B right
+    elif paddler.rect.x + 60 < ball.x < paddler.rect.x + 80 and \
+            paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
         return [3, -3]
     # velocity C
-    elif paddler.rect.x + 50 < ball.x < paddler.rect.x + 60 and paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
+    elif paddler.rect.x + 50 < ball.x < paddler.rect.x + 60 and \
+            paddler.rect.y < ball.y + conf.player_heigth < paddler.rect.y + conf.player_heigth/2:
         return [0, -3]
     # no collision
     else:
         return velocity
 
+
+def brick_collision(ball, velocity_0, velocity_1):
+    for block in conf.block_list:
+        if ball.colliderect(block[0]):
+            # checking the collision side
+            print('teste colisão')
+            # top collision
+            if abs(block[0].rect.y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+                velocity_1 *= -1
+            # bottom collision
+            elif abs((block[0].rect.y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+                velocity_1 *= -1
+            # right collision
+            elif abs(block[0].rect.x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+                velocity_0 *= -1
+            # left collision
+            elif abs((block[0].rect.x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+                velocity_0 *= -1
+            conf.block_list.remove(block)
+    return [velocity_0, velocity_1]
