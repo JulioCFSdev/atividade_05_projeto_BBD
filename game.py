@@ -15,6 +15,7 @@ class EldenBlocks:
 
     # Initial variables and set screen
     def __init__(self):
+        self.bg = pygame.image.load("wall_dependencies/bg.png")
         self.score = 0
         self.lives = 3
         self.clock = pygame.time.Clock()
@@ -25,6 +26,7 @@ class EldenBlocks:
         pygame.display.set_caption(conf.bg_name)
         self.screen = pygame.display.set_mode((conf.screen_width, conf.screen_height))
         self.brick = bricks.create_wall()
+
 
     # Game loop
     def main_loop(self):
@@ -75,9 +77,8 @@ class EldenBlocks:
     # Drawing the screen and its factors
     def draw(self):
         self.screen.fill(conf.black)
-
         # draw screen
-        wall.bg_run("wall_dependencies/bg_test.png", conf.coord_bg, self.screen)
+        self.screen.blit(self.bg, (0, 0))
         wall.hud_score(self.screen, conf.screen_width, conf.pos_money, self.score, conf.pos_score)
         wall.hud_lives(self.screen, conf.screen_width, conf.pos_life_icon, self.lives,
                        conf.pos_life_var)
