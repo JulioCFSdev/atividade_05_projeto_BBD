@@ -1,15 +1,6 @@
 import pygame
 from pygame.locals import *
 
-pygame.init()
-
-BLUE = (0, 0, 0)
-width = 800
-heigth = 720
-
-screen = pygame.display.set_mode((width, heigth))
-pygame.display.set_caption('Testing sprites')
-
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
