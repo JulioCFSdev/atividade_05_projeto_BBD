@@ -1,23 +1,5 @@
-import pygame
-import wall
-import ball
-import player
-from config import Config
-import brick
-import sys
-
-# Shrinking class call characters
-conf = Config()
-paddler = player.Player()
-bricks = brick
-
-# Class to start our game
-class EldenBlocks:
-
     # Initial variables and set screen
     def __init__(self):
-        self.bg = pygame.image.load("wall_dependencies/bg.png")
-        self.bg1 = pygame.image.load("wall_dependencies/bg1.png")
         self.score = 0
         self.lives = 3
         self.clock = pygame.time.Clock()
@@ -31,14 +13,13 @@ class EldenBlocks:
 
     # Main Menu:
     def Menu(self):
-        font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-        menu_txt = font.render("Menu Principal", 1, (255, 255, 255))
-        play_txt = font.render("Play", 1, (255, 255, 255))
-        quit_txt = font.render("Quit", 1, (255, 255, 255))
+        menu_txt = conf.font.render("Menu Principal", 1, conf.white)
+        play_txt = conf.font.render("Play", 1, conf.white)
+        quit_txt = conf.font.render("Quit", 1, conf.white)
         click = False
         while True:
             self.screen.fill((0, 0, 0))
-            self.screen.blit(self.bg1, (0, 0))
+            self.screen.blit(conf.bg_menu, (0, 0))
             self.screen.blit(menu_txt, ((conf.screen_width / 2) - 150, 40))
             mx, my = pygame.mouse.get_pos()
 
@@ -81,9 +62,8 @@ class EldenBlocks:
                 conf.time_text = str(conf.time_counter).rjust(
                     3) if conf.time_counter > 0 else "X"
             if conf.time_text == "X":
-                font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-                text = font2.render("GAME OVER", True, (255, 255, 255))
-                self.screen.blit(text, (conf.screen_width / 2 - 100, conf.screen_height / 2))
+                game_over_text = conf.font.render("GAME OVER", True, (255, 255, 255))
+                self.screen.blit(game_over_text, (conf.screen_width / 2 - 100, conf.screen_height / 2))
                 pygame.display.flip()
                 pygame.time.wait(2000)
                 pygame.quit()
@@ -113,13 +93,13 @@ class EldenBlocks:
     def draw(self):
         self.screen.fill(conf.black)
         # draw screen
-        self.screen.blit(self.bg, (0, 0))
+        self.screen.blit(conf.bg_main_1, (0, 0))
         wall.hud_score(self.screen, conf.screen_width, conf.pos_money, self.score, conf.pos_score)
         wall.hud_lives(self.screen, conf.screen_width, conf.pos_life_icon, self.lives,
                        conf.pos_life_var)
         wall.hud_time(self.screen, conf.screen_width, conf.pos_time_icon, conf.time_text,
                       conf.pos_time_value)
-        wall.screen_lines(self.screen, conf.pink, conf.screen_width, conf.screen_height,
+        wall.screen_lines(self.screen, conf.pink,
                           conf.line_size)
 
         # draw ball
