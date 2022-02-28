@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -24,10 +25,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.topleft = [self.x, self.y]
 
     def update(self):
-            #self.rect.x -= self.speed
-            self.actual = self.actual + 0.2
-            if self.actual >= len(self.sprites_1):
-                self.actual = 0
+        self.actual = self.actual + 0.2
+        if self.actual >= len(self.sprites_1):
+            self.actual = 0
             self.image = self.sprites_1[int(self.actual)]
             self.image = pygame.transform.scale(self.image, (32 * 5, 32 * 5))
 
@@ -58,6 +58,3 @@ class Player(pygame.sprite.Sprite):
 all_sprite = pygame.sprite.Group()
 player = Player()
 all_sprite.add(player)
-
-
-
