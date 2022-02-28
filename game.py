@@ -89,6 +89,7 @@
         # death point - (collision ball/wall down)
         self.ball_velocity[0] *= ball.lower_wall_collision(self.ball)
 
+        
     # Drawing the screen and its factors
     def draw(self):
         self.screen.fill(conf.black)
