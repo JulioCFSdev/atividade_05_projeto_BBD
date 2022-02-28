@@ -4,6 +4,7 @@ import ball
 import player
 from config import Config
 import brick
+import sys
 
 # Shrinking class call characters
 conf = Config()
@@ -16,6 +17,7 @@ class EldenBlocks:
     # Initial variables and set screen
     def __init__(self):
         self.bg = pygame.image.load("wall_dependencies/bg.png")
+        self.bg1 = pygame.image.load("wall_dependencies/bg1.png")
         self.score = 0
         self.lives = 3
         self.clock = pygame.time.Clock()
@@ -27,7 +29,40 @@ class EldenBlocks:
         self.screen = pygame.display.set_mode((conf.screen_width, conf.screen_height))
         self.brick = bricks.create_wall()
 
+    # Main Menu:
+    def Menu(self):
+        font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
+        menu_txt = font.render("Menu Principal", 1, (255, 255, 255))
+        play_txt = font.render("Play", 1, (255, 255, 255))
+        quit_txt = font.render("Quit", 1, (255, 255, 255))
+        click = False
+        while True:
+            self.screen.fill((0, 0, 0))
+            self.screen.blit(self.bg1, (0, 0))
+            self.screen.blit(menu_txt, ((conf.screen_width / 2) - 150, 40))
+            mx, my = pygame.mouse.get_pos()
 
+            play_button = self.screen.blit(play_txt, ((conf.screen_width / 2) - 30, 300))
+            quit_button = self.screen.blit(quit_txt, ((conf.screen_width / 2) - 30, 500))
+            if play_button.collidepoint((mx, my)):
+                if click:
+                    self.main_loop()
+            if quit_button.collidepoint((mx, my)):
+                if click:
+                    pygame.quit()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        click = True
+            pygame.display.update()
+            self.clock.tick(conf.fps)
     # Game loop
     def main_loop(self):
         while True:
