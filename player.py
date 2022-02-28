@@ -10,11 +10,11 @@ class Player(pygame.sprite.Sprite):
         self.sprites_1 = []
         self.sprites_2 = []
         self.sprites_3 = []
-        self.sprites_1.append(pygame.image.load('Player_sprite (1)/l0_sprite_1.png'))
-        self.sprites_2.append(pygame.image.load('Player_sprite (1)/l0_sprite_1.png'))
-        self.sprites_3.append(pygame.image.load('Player_sprite (1)/l0_sprite_1.png'))
-        self.sprites_2.append(pygame.image.load('Player_sprite (1)/l0_sprite_2.png'))
-        self.sprites_3.append(pygame.image.load('Player_sprite (1)/l0_sprite_3.png'))
+        self.sprites_1.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
+        self.sprites_2.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
+        self.sprites_3.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
+        self.sprites_2.append(pygame.image.load('Player_sprite/l0_sprite_2.png'))
+        self.sprites_3.append(pygame.image.load('Player_sprite/l0_sprite_3.png'))
         self.actual = 0
         self.image = self.sprites_1[self.actual]
         self.image = pygame.transform.scale(self.image, (32*5, 32*5))
