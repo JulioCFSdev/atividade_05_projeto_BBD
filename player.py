@@ -25,9 +25,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.topleft = [self.x, self.y]
 
     def update(self):
-        self.actual = self.actual + 0.2
-        if self.actual >= len(self.sprites_1):
-            self.actual = 0
+            self.actual = self.actual + 0.2
+            if self.actual >= len(self.sprites_1):
+                self.actual = 0
             self.image = self.sprites_1[int(self.actual)]
             self.image = pygame.transform.scale(self.image, (32 * 5, 32 * 5))
 
