@@ -1,94 +1,41 @@
 import pygame
+from config import Config
 
 pygame.init()
-
-# CONSTANTS NEEDED IN THE LOOP
-
-# width = 1000
-# height = 800
-# score = 0
-# lives = 3
-# time = "3:00"
-# size = (width, height)
-# screen = pygame.display.set_mode(size)
-# clock = pygame.time.Clock()
-
+conf = Config()
 
 
 def hud_score(display, size, pos_money_icon_var, score_value, pos_score_value_var):
-    WHITE = (255, 255, 255)
-    font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-    font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-    text = font.render("💰", True, WHITE)
+    text = conf.font2.render("💰", True, conf.white)
     display.blit(text, (size - (size / pos_money_icon_var), 1))  # 1.05
-    text2 = font2.render(":  " + str(score_value), True, WHITE)
+    text2 = conf.font.render(":  " + str(score_value), True, conf.white)
     display.blit(text2, (size - (size / pos_score_value_var), 1))  # 1.15
     # MAIN SETTING = hud_score(screen, width, 1.05, 1.15)
 
-
-# BROKE DOWN THE HUD FUNCTION INTO 3 DIFFERENT ONES, HAD TO ASSIGN FONT AND COLOR INSIDE, CAN IMPROVE.
+    
 def hud_lives(display, size, pos_lives_icon_var, life_value, pos_lives_value_var):
-    WHITE = (255, 255, 255)
-    font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-    font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-    text = font.render("💕", True, WHITE)
+    text = conf.font2.render("💕", True, conf.white)
     display.blit(text, (size / pos_lives_icon_var, 1))  # 2.35
-    text2 = font2.render(": " + str(life_value), True, WHITE)
+    text2 = conf.font.render(": " + str(life_value), True, conf.white)
     display.blit(text2, (size - (size / pos_lives_value_var), 1))  # 2
     # MAIN SETTING = hud_lives(screen, width, 2.35, 2)
 
 
-def hud_time(display, size ,pos_time_icon_var, time_value, pos_time_value_var):
-    WHITE = (255, 255, 255)
-    font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-    font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-    text = font.render("⏱", True, WHITE)
+def hud_time(display, size, pos_time_icon_var, time_value, pos_time_value_var):
+    text = conf.font2.render("⏱", True, conf.white)
     display.blit(text, (size - (size / pos_time_icon_var), 1))  # 4
-    time_txt = font2.render(": " + time_value, True, (255, 255, 255))
+    time_txt = conf.font.render(": " + time_value, True, conf.white)
     display.blit(time_txt, (size - (size / pos_time_value_var), 1))  # 5.5
     # MAIN SETTING = hud_time(screen, width, 4, time_text, 5.5)
 
-def hud_score(display, size, pos_money_icon_var, score_value, pos_score_value_var):
-    WHITE = (255, 255, 255)
-    font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-    font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-    text = font.render("💰", True, WHITE)
-    display.blit(text, (size - (size / pos_money_icon_var), 1))  # 1.05
-    text2 = font2.render(":  " + str(score_value), True, WHITE)
-    display.blit(text2, (size - (size / pos_score_value_var), 1))  # 1.15
-    # MAIN SETTING = hud_score(screen, width, 1.05, 1.15)
 
-
-    # BROKE DOWN THE HUD FUNCTION INTO 3 DIFFERENT ONES, HAD TO ASSIGN FONT AND COLOR INSIDE, CAN IMPROVE.
-def hud_lives(display, size, pos_lives_icon_var, life_value, pos_lives_value_var):
-    WHITE = (255, 255, 255)
-    font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-    font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-    text = font.render("💕", True, WHITE)
-    display.blit(text, (size / pos_lives_icon_var, 1))  # 2.35
-    text2 = font2.render(": " + str(life_value), True, WHITE)
-    display.blit(text2, (size - (size / pos_lives_value_var), 1))  # 2
-    # MAIN SETTING = hud_lives(screen, width, 2.35, 2)
-
-def hud_time(display, size ,pos_time_icon_var, time_value, pos_time_value_var):
-    WHITE = (255, 255, 255)
-    font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-    font2 = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
-    text = font.render("⏱", True, WHITE)
-    display.blit(text, (size - (size / pos_time_icon_var), 1))  # 4
-    time_txt = font2.render(": " + time_value, True, (255, 255, 255))
-    display.blit(time_txt, (size - (size / pos_time_value_var), 1))  # 5.5
-    # MAIN SETTING = hud_time(screen, width, 4, time_text, 5.5)
-
-def screen_lines(display, color, WIDTH, HEIGHT, line_size):
+def screen_lines(display, color, line_size):
     # Color must be in the rgb format(x, x, x) or with an equivalent constant
     # horizontal lines
-    pygame.draw.line(display, color, [0, 50], [WIDTH, 50], line_size)
+    pygame.draw.line(display, color, [0, 50], [conf.screen_width, 50], line_size)
 
     # vertical lines
-    pygame.draw.line(display, color, [0, 0], [0, HEIGHT], line_size)
-    pygame.draw.line(display, color, [WIDTH, 0], [WIDTH, HEIGHT], line_size)
+    pygame.draw.line(display, color, [0, 0], [0, conf.screen_height], line_size)
+    pygame.draw.line(display, color, [conf.screen_width, 0], [conf.screen_width, conf.screen_height], line_size)
 
     # MAIN SETTING = screen_lines((255, 0, 255), 12)
-
-
