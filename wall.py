@@ -15,17 +15,6 @@ pygame.init()
 
 
 
-def bg_run(image_file, pos, display):
-    bg = pygame.image.load(image_file)
-    display.blit(bg, pos)
-
-    # FILE DIRECTORY WITH FILE TYPE AT THE END, EXAMPLE = image.jpeg, pos = x and y
-    # in the following form [x, y]
-
-    # IDEALLY, YOU'LL WANT TO DO THIS MANUALLY, SO THAT WHEN WE NEED TO CHANGE THE
-    # BG, ONLY THE VARIABLE bg IS CHANGED, in that case, do the bg outside
-    # the loop, then change it inside afterwards
-
 def hud_score(display, size, pos_money_icon_var, score_value, pos_score_value_var):
     WHITE = (255, 255, 255)
     font = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
