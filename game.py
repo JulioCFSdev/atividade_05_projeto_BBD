@@ -1,5 +1,6 @@
 import pygame
 import wall
+<<<<<<< HEAD
 import brick
 import player
 import config
@@ -9,6 +10,20 @@ import sys
 conf = config.Config()
 paddler = player.Player()
     
+=======
+import ball
+import player
+from config import Config
+import brick
+import sys
+
+# Shrinking class call characters
+conf = Config()
+paddler = player.Player()
+bricks = brick
+
+# Class to start our game
+>>>>>>> 9767ffd8f67a11385c5a49e06dd7d8c32ba3493c
 class EldenBlocks:
 
     # Initial variables and set screen
@@ -104,7 +119,6 @@ class EldenBlocks:
         # death point - (collision ball/wall down)
         self.ball_velocity[0] *= ball.lower_wall_collision(self.ball)
 
-        
     # Drawing the screen and its factors
     def draw(self):
         self.screen.fill(conf.black)
