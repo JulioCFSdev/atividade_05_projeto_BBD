@@ -81,4 +81,6 @@ def paddler_collision(ball, velocity, paddler):
     else:
         return velocity
 
+print("Teste github")
+
 

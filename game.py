@@ -1,16 +1,5 @@
 import pygame
 import wall
-<<<<<<< HEAD
-import brick
-import player
-import config
-import ball
-import sys
-
-conf = config.Config()
-paddler = player.Player()
-    
-=======
 import ball
 import player
 from config import Config
@@ -23,7 +12,6 @@ paddler = player.Player()
 bricks = brick
 
 # Class to start our game
->>>>>>> 9767ffd8f67a11385c5a49e06dd7d8c32ba3493c
 class EldenBlocks:
 
     # Initial variables and set screen
