@@ -12,7 +12,7 @@ paddler = player.Player()
     
 =======
 import ball
-import player
+from player import all_sprite, player
 from config import Config
 import brick
 import sys
@@ -78,7 +78,6 @@ class EldenBlocks:
             self.handle_input()
             self.game_logic()
             self.draw()
-            player.Player().update()
             pygame.display.flip()
             pygame.display.update()
             self.clock.tick(conf.fps)
@@ -105,7 +104,6 @@ class EldenBlocks:
     def game_logic(self):
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
-        player.Player().move()  # movement paddler
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler)
         # collision ball/blocks
@@ -135,7 +133,9 @@ class EldenBlocks:
         # draw ball
         ball.draw_ball(self.screen, self.ball)
         # draw paddler
-        player.Player.draw_paddler(self.screen)
+        all_sprite.draw(self.screen)
+        all_sprite.update()
+        player.move()
         # draw blocks
         brick.draw_bricks(self.screen)
         # draw power-ups (?)
