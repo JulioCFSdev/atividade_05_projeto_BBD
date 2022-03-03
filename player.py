@@ -1,5 +1,7 @@
+import config
 import pygame
 from pygame.locals import *
+conf =  config.Config()
 
 
 class Player(pygame.sprite.Sprite):
@@ -46,8 +48,8 @@ class Player(pygame.sprite.Sprite):
             if key[pygame.K_RIGHT]:
                 self.rect.x += self.speed
                 self.direction = 1
-                if self.rect.right >= 800:
-                    self.rect.right = 800
+                if self.rect.right >= 1000:
+                    self.rect.right = 1000
                 self.actual = self.actual + 1
                 if self.actual >= len(self.sprites_2):
                     self.actual = 0
@@ -55,6 +57,9 @@ class Player(pygame.sprite.Sprite):
                 self.image = pygame.transform.scale(self.image, (32 * 5, 32 * 5))
 
 
-all_sprite = pygame.sprite.Group()
-player = Player()
-all_sprite.add(player)
+    def draw_paddler(screen):
+        all_sprite = pygame.sprite.Group()
+        player = Player()
+        all_sprite.add(player)
+        all_sprite.draw(screen)
+        all_sprite.update()

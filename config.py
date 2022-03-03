@@ -10,7 +10,7 @@ class Config:
         self.bg_name = "Blocks Age"
         self.coord_bg = [0, 0]
         self.bg_main_1 = pygame.image.load("wall_dependencies/bg.png")
-        self.bg_menu = pygame.image.load("wall_dependencies/bg1.png")
+        self.bg_menu = pygame.image.load("wall_dependencies/bg.png")
         # Fonts and Texts
         self.font2 = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
         self.font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
@@ -47,6 +47,10 @@ class Config:
         self.block_height = 25
         self.block_individual = []
         self.block_list = []
+        # Player sprites
+
+        # Player position
+        self.actual = 0
         # Player dimension values
         self.player_width = 110
         self.player_heigth = 20
@@ -68,5 +72,19 @@ class Config:
         self.tresh_upper_wall = 58
         # Frames por second value
         self.fps = 120
+        # Paddler values 
+        self.x = 340
+        self.y = 570
+        self.sprites_1 = []
+        self.sprites_2 = []
+        self.sprites_3 = []
+        self.sprites_1.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
+        self.sprites_2.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
+        self.sprites_3.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
+        self.sprites_2.append(pygame.image.load('Player_sprite/l0_sprite_2.png'))
+        self.sprites_3.append(pygame.image.load('Player_sprite/l0_sprite_3.png'))
+        self.actual = 0
+        self.speed = 10
+        self.direction = 0
 
         

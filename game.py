@@ -1,3 +1,16 @@
+import pygame
+import wall
+import brick
+import player
+import config
+import ball
+import sys
+
+conf = config.Config()
+paddler = player.Player()
+    
+class EldenBlocks:
+
     # Initial variables and set screen
     def __init__(self):
         self.score = 0
@@ -9,7 +22,7 @@
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         pygame.display.set_caption(conf.bg_name)
         self.screen = pygame.display.set_mode((conf.screen_width, conf.screen_height))
-        self.brick = bricks.create_wall()
+        self.brick = brick.create_wall()
 
     # Main Menu:
     def Menu(self):
@@ -19,7 +32,7 @@
         click = False
         while True:
             self.screen.fill((0, 0, 0))
-            self.screen.blit(conf.bg_menu, (0, 0))
+            self.screen.blit(conf.bg_main_1, (0, 0))
             self.screen.blit(menu_txt, ((conf.screen_width / 2) - 150, 40))
             mx, my = pygame.mouse.get_pos()
 
@@ -50,6 +63,7 @@
             self.handle_input()
             self.game_logic()
             self.draw()
+            player.Player().update()
             pygame.display.flip()
             pygame.display.update()
             self.clock.tick(conf.fps)
@@ -74,12 +88,13 @@
 
     # Mechanics and world rules
     def game_logic(self):
+
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
-        paddler.move()  # movement paddler
+        player.Player().move()  # movement paddler
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler)
         # collision ball/blocks
-        self.ball_velocity = bricks.brick_collision(self.ball, self.ball_velocity[0], self.ball_velocity[1])
+        self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0], self.ball_velocity[1])
         # left wall collision
         self.ball_velocity[0] *= ball.left_wall_collision(self.ball)
         # right wall collision
@@ -106,7 +121,7 @@
         # draw ball
         ball.draw_ball(self.screen, self.ball)
         # draw paddler
-        paddler.draw(self.screen, conf.pink)
+        player.Player.draw_paddler(self.screen)
         # draw blocks
-        bricks.draw_bricks(self.screen)
+        brick.draw_bricks(self.screen)
         # draw power-ups (?)
