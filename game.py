@@ -8,7 +8,6 @@ import ball
 import sys
 
 conf = config.Config()
-paddler = player.Player()
     
 =======
 import ball
