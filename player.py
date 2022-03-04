@@ -27,7 +27,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.topleft = [self.x, self.y]
 
     def update(self):
-            self.actual = self.actual + 0.2
+            self.actual = self.actual + 0.05
             if self.actual >= len(self.sprites_1):
                 self.actual = 0
             self.image = self.sprites_1[int(self.actual)]
@@ -56,10 +56,6 @@ class Player(pygame.sprite.Sprite):
                 self.image = self.sprites_2[int(self.actual)]
                 self.image = pygame.transform.scale(self.image, (32 * 5, 32 * 5))
 
-
-    def draw_paddler(screen):
-        all_sprite = pygame.sprite.Group()
-        player = Player()
-        all_sprite.add(player)
-        all_sprite.draw(screen)
-        all_sprite.update()
+all_sprite = pygame.sprite.Group()
+player = Player()
+all_sprite.add(player)
