@@ -23,6 +23,11 @@ class Config:
         self.pos_life_var = 2
         self.pos_time_icon = 4
         self.pos_time_value = 5.5
+        # Power up variables
+        self.power_freeze = False
+        self.power_fire = False
+        self.power_gyro = False
+        self.power_ultra = False
         # Line size on sides and top
         self.line_size = 12
         # Time related values
