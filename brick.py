@@ -45,19 +45,21 @@ def create_wall():
 
 def draw_bricks(screen):
     for block in conf.block_list:
-        if block[2] == 0:
-            color = conf.yellow
-        elif block[2] == 1:
+        if block[3] == 1:
+            if block[2] == 3:
+                color = conf.blue
+            else:
+                color = conf.yellow
+        elif block[3] == 2:
             color = conf.green
-        elif block[2] == 2:
+        elif block[3] == 3:
             color = conf.red
-        elif block[2] == 3:
-            color = conf.blue
         pygame.draw.rect(screen, color, block[0])
         pygame.draw.rect(screen, conf.black, (block[0]), 1)
 
 
 def brick_collision(ball, velocity_0, velocity_1):
+    n = 0
     for block in conf.block_list:
         if ball.colliderect(block[0]):
             # checking the collision side
@@ -72,5 +74,10 @@ def brick_collision(ball, velocity_0, velocity_1):
             # left collision
             elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                 velocity_0 *= -1
-            conf.block_list.remove(block)
+            if block[3] != 1:
+                conf.block_list[n][3] -= 1
+            else:
+                conf.block_list.remove(block)
+
+        n += 1
     return [velocity_0, velocity_1]

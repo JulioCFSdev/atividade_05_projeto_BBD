@@ -8,7 +8,7 @@ import sys
 
 # Shrinking class call characters
 conf = Config()
-paddler = player.Player()
+paddler = player
 bricks = brick
 
 # Class to start our game
