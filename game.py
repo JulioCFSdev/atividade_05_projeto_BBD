@@ -25,7 +25,11 @@ class EldenBlocks:
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         pygame.display.set_caption(conf.bg_name)
         self.screen = pygame.display.set_mode((conf.screen_width, conf.screen_height))
-        self.brick = brick.create_wall()
+        self.brick_1 = brick.create_stage_1()
+        self.brick_2 = brick.create_stage_2()
+        self.brick_3 = brick.create_stage_3()
+        self.brick_boss = brick.create_boss_fight()
+
 
     # Main Menu:
     def Menu(self):

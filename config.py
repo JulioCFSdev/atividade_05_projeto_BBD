@@ -14,6 +14,8 @@ class Config:
         # Fonts and Texts
         self.font2 = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
         self.font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
+        # Stage values
+        self.stage = 1
         # Icon and character position constants
         self.pos_money = 1.05
         self.pos_score = 1.15
@@ -41,14 +43,24 @@ class Config:
         self.ball_x_init = 500
         self.ball_y_init = 400
         # Block values (Coluns and rows, dimensions, list)
-        self.row_bricks = 10
-        self.col_bricks = 19
+        self.row_bricks_1 = 10
+        self.col_bricks_1 = 19
+        self.row_bricks_2 = 1
+        self.col_bricks_2 = 1
+        self.row_bricks_3 = 1
+        self.col_bricks_3 = 1
+        self.row_bricks_boss = 1
+        self.col_bricks_boss = 1
         self.block_width = 50
         self.block_height = 25
-        self.block_individual = []
-        self.block_list = []
-        # Player sprites
-
+        self.block_individual_1 = []
+        self.block_list_1 = []
+        self.block_individual_2 = []
+        self.block_list_2 = []
+        self.block_individual_3 = []
+        self.block_list_3 = []
+        self.block_individual_boss = []
+        self.block_list_boss = []
         # Player position
         self.actual = 0
         # Player dimension values
