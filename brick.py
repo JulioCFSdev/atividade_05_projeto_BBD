@@ -1,9 +1,11 @@
 import pygame
 import config
+from powerup import PowerUp
 
 # define the wall blocks function
 conf = config.Config()
 
+power_up_sprites = pygame.sprite.Group()
 
 # Create the wall blocks stage 1
 def create_stage_1():
@@ -156,6 +158,7 @@ def create_boss_fight():
             conf.block_individual_boss = [block, score, block_type, block_life]
             conf.block_list_boss.append(conf.block_individual_boss)
 
+
 # Draw wall brick function
 def draw_bricks(screen):
     # Determining which block wall to check
@@ -182,11 +185,12 @@ def draw_bricks(screen):
         pygame.draw.rect(screen, color, block[0])
         pygame.draw.rect(screen, conf.black, (block[0]), 1)
 
+
 # brick colission function
 def brick_collision(ball, velocity_0, velocity_1):
     n = 0
     conf.money_up = False
-    
+
     # Moving to the next stage
     if conf.all_bricks < 1:
         conf.stage += 1
@@ -219,14 +223,14 @@ def brick_collision(ball, velocity_0, velocity_1):
             if block[3] != 1:
                 wall_block[n][3] -= 1
                 conf.money_up = True
-                 
-                
+
+
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
                 conf.money_up = True
-                 
-                
+
+
         elif conf.power_ultra and ball.colliderect(block[0]):
             block[3] = 1
             # checking the collision side
@@ -244,13 +248,13 @@ def brick_collision(ball, velocity_0, velocity_1):
             if block[3] != 1:
                 wall_block[n][3] -= 1
                 conf.money_up = True
-                 
-                
+
+
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
                 conf.money_up = True
-                 
+
 
         elif ball.colliderect(block[0]):
             # checking the collision side
@@ -265,10 +269,17 @@ def brick_collision(ball, velocity_0, velocity_1):
             # left collision
             elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                 velocity_0 *= -1
+
+
+            if block[2] == 3:
+                powerup = PowerUp(block[0].x, block[0].y)
+                power_up_sprites.add(powerup)
+
+
             if block[3] != 1:
                 wall_block[n][3] -= 1
                 conf.money_up = True
-                
+
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
