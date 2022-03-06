@@ -185,6 +185,7 @@ def draw_bricks(screen):
 # brick colission function
 def brick_collision(ball, velocity_0, velocity_1):
     n = 0
+    conf.money_up = False
     
     # Moving to the next stage
     if conf.all_bricks < 1:
@@ -217,11 +218,13 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_0 *= -1
             if block[3] != 1:
                 wall_block[n][3] -= 1
+                conf.money_up = True
                  
                 
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
+                conf.money_up = True
                  
                 
         elif conf.power_ultra and ball.colliderect(block[0]):
@@ -240,11 +243,13 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_1 = velocity_1
             if block[3] != 1:
                 wall_block[n][3] -= 1
+                conf.money_up = True
                  
                 
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
+                conf.money_up = True
                  
 
         elif ball.colliderect(block[0]):
@@ -262,12 +267,16 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_0 *= -1
             if block[3] != 1:
                 wall_block[n][3] -= 1
-                 
+                conf.money_up = True
                 
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-                 
+                conf.money_up = True
 
         n += 1
     return [velocity_0, velocity_1]
+
+
+def money_up():
+    return conf.money_up
