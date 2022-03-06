@@ -1,7 +1,8 @@
 import config
 import pygame
 from pygame.locals import *
-conf =  config.Config()
+from brick import powerups, power_up_sprites
+conf = config.Config()
 
 
 class Player(pygame.sprite.Sprite):
@@ -56,6 +57,13 @@ class Player(pygame.sprite.Sprite):
                 self.image = self.sprites_2[int(self.actual)]
                 self.image = pygame.transform.scale(self.image, (32 * 5, 32 * 5))
 
+
 all_sprite = pygame.sprite.Group()
 player = Player()
 all_sprite.add(player)
+
+
+def player_power_up_collision(player1):
+    for powerup in powerups:
+        if pygame.sprite.collide_mask(powerup, player1):
+            power_up_sprites.remove(powerup)
