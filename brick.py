@@ -6,6 +6,7 @@ from powerup import PowerUp
 conf = config.Config()
 
 power_up_sprites = pygame.sprite.Group()
+powerups = []
 
 # Create the wall blocks stage 1
 def create_stage_1():
@@ -273,6 +274,7 @@ def brick_collision(ball, velocity_0, velocity_1):
 
             if block[2] == 3:
                 powerup = PowerUp(block[0].x, block[0].y)
+                powerups.append(powerup)
                 power_up_sprites.add(powerup)
 
 
