@@ -20,7 +20,9 @@ class EldenBlocks:
         self.lives = 3
         self.clock = pygame.time.Clock()
         self.ball = ball.create_ball()
-        self.ball_velocity = ball.ball_velocity(conf.ball_speed_x, conf.ball_speed_y)
+        self.ball_speed_x = 3
+        self.ball_speed_y = 3
+        self.ball_velocity = ball.ball_velocity(self.ball_speed_x, self.ball_speed_y)
         pygame.init()
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         pygame.display.set_caption(conf.bg_name)
@@ -95,11 +97,22 @@ class EldenBlocks:
     # Mechanics and world rules
     def game_logic(self):
 
+        if conf.power_fire:
+            self.ball_speed_x = self.ball_speed_x + (self.ball_speed_x / 3)
+            self.ball_speed_y = self.ball_speed_y + (self.ball_speed_y / 3)
+            conf.power_fire = False
+        if conf.power_freeze:
+            self.ball_speed_x = self.ball_speed_x - (self.ball_speed_x / 4)
+            self.ball_speed_y = self.ball_speed_y - (self.ball_speed_y / 4)
+            conf.power_freeze = False
+
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
         # collision ball/paddler
-        self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler)
+        self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,
+                                                    self.ball_speed_x, self.ball_speed_y)
         # collision ball/blocks
-        self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0], self.ball_velocity[1])
+        self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0],
+                                                   self.ball_velocity[1])
         # left wall collision
         self.ball_velocity[0] *= ball.left_wall_collision(self.ball)
         # right wall collision
@@ -107,14 +120,13 @@ class EldenBlocks:
         # upper wall collision
         self.ball_velocity[1] *= ball.upper_wall_collision(self.ball)
         # death point - (collision ball/wall down)
-<<<<<<< HEAD
-        self.ball_velocity[0] *= ball.lower_wall_collision(self.ball)
+        self.ball_velocity = ball.lower_wall_collision(self.ball, self.ball_velocity,
+                                                       self.ball_speed_x, self.ball_speed_y)
         # Score up
         if self.ball_velocity[2]:
             self.score += 5
-=======
-        self.ball_velocity = ball.lower_wall_collision(self.ball, self.ball_velocity)
->>>>>>> 133cd2922df06adadbd93ad671972aa2a3990a9a
+        self.ball_velocity = ball.lower_wall_collision(self.ball, self.ball_velocity,
+                                                       self.ball_speed_x, self.ball_speed_y)
 
     # Drawing the screen and its factors
     def draw(self):
