@@ -16,6 +16,8 @@ class Config:
         self.font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
         # Stage values
         self.stage = 1
+        # Score value
+        self.coli = False
         # Icon and character position constants
         self.pos_money = 1.05
         self.pos_score = 1.15
@@ -56,6 +58,7 @@ class Config:
         self.col_bricks_3 = 1
         self.row_bricks_boss = 1
         self.col_bricks_boss = 1
+        self.all_bricks = 190
         self.block_width = 50
         self.block_height = 25
         self.block_individual_1 = []

@@ -5,14 +5,14 @@ import config
 conf = config.Config()
 
 
-# Create the wall blocks
+# Create the wall blocks stage 1
 def create_stage_1():
     for row in range(conf.row_bricks_1):
         for col in range(conf.col_bricks_1):
             block_x = col * conf.block_width + 20
             block_y = row * conf.block_height + 100
 
-            score = 500
+            score = 5
 
             # Determining block types
             if row == 9:
@@ -43,14 +43,14 @@ def create_stage_1():
             conf.block_list_1.append(conf.block_individual_1)
 
 
-# Create the wall blocks
+# Create the wall blocks stage 2
 def create_stage_2():
     for row in range(conf.row_bricks_2):
         for col in range(conf.col_bricks_2):
             block_x = col * conf.block_width + 20
             block_y = row * conf.block_height + 100
 
-            score = 500
+            score = 5
 
             # Determining block types
             if row == 9:
@@ -81,14 +81,14 @@ def create_stage_2():
             conf.block_list_2.append(conf.block_individual_2)
 
 
-# Create the wall blocks
+# Create the wall blocks stage 3
 def create_stage_3():
     for row in range(conf.row_bricks_3):
         for col in range(conf.col_bricks_3):
             block_x = col * conf.block_width + 20
             block_y = row * conf.block_height + 100
 
-            score = 500
+            score = 5
 
             # Determining block types
             if row == 9:
@@ -126,7 +126,7 @@ def create_boss_fight():
             block_x = col * conf.block_width + 20
             block_y = row * conf.block_height + 100
 
-            score = 500
+            score = 5
 
             # Determining block types
             if row == 9:
@@ -156,8 +156,9 @@ def create_boss_fight():
             conf.block_individual_boss = [block, score, block_type, block_life]
             conf.block_list_boss.append(conf.block_individual_boss)
 
-
+# Draw wall brick function
 def draw_bricks(screen):
+    # Determining which block wall to check
     if conf.stage == 1:
         wall_block = conf.block_list_1
     elif conf.stage == 2:
@@ -181,9 +182,17 @@ def draw_bricks(screen):
         pygame.draw.rect(screen, color, block[0])
         pygame.draw.rect(screen, conf.black, (block[0]), 1)
 
-
+# brick colission function
 def brick_collision(ball, velocity_0, velocity_1):
     n = 0
+    coli = False
+    
+    # Moving to the next stage
+    if conf.all_bricks < 1:
+        conf.stage += 1
+        conf.all_bricks = 100
+
+    # Determining which block wall to check
     if conf.stage == 1:
         wall_block = conf.block_list_1
     elif conf.stage == 2:
@@ -209,8 +218,12 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_0 *= -1
             if block[3] != 1:
                 wall_block[n][3] -= 1
+                coli = True
+                
             else:
                 wall_block.remove(block)
+                conf.all_bricks -= 1
+                coli = True
                 
         elif conf.power_ultra and ball.colliderect(block[0]):
             block[3] = 1
@@ -228,8 +241,12 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_1 = velocity_1
             if block[3] != 1:
                 wall_block[n][3] -= 1
+                coli = True
+                
             else:
                 wall_block.remove(block)
+                conf.all_bricks -= 1
+                coli = True
 
         elif ball.colliderect(block[0]):
             # checking the collision side
@@ -246,8 +263,12 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_0 *= -1
             if block[3] != 1:
                 wall_block[n][3] -= 1
+                coli = True
+                
             else:
                 wall_block.remove(block)
+                conf.all_bricks -= 1
+                coli = True
 
         n += 1
-    return [velocity_0, velocity_1]
+    return [velocity_0, velocity_1, coli]

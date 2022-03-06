@@ -108,6 +108,9 @@ class EldenBlocks:
         self.ball_velocity[1] *= ball.upper_wall_collision(self.ball)
         # death point - (collision ball/wall down)
         self.ball_velocity[0] *= ball.lower_wall_collision(self.ball)
+        # Score up
+        if self.ball_velocity[2]:
+            self.score += 5
 
     # Drawing the screen and its factors
     def draw(self):
