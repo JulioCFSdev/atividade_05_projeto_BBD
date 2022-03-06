@@ -35,6 +35,8 @@ class EldenBlocks:
 
     # Main Menu:
     def Menu(self):
+        pygame.mixer.music.load("wall_dependencies/main_loop_song.mp3")
+        pygame.mixer.music.play()
         menu_txt = conf.font.render("Menu Principal", 1, conf.white)
         play_txt = conf.font.render("Play", 1, conf.white)
         quit_txt = conf.font.render("Quit", 1, conf.white)
@@ -68,6 +70,8 @@ class EldenBlocks:
             self.clock.tick(conf.fps)
     # Game loop
     def main_loop(self):
+        pygame.mixer.music.load("wall_dependencies/menu_song.mp3")
+        pygame.mixer.music.play()
         while True:
             self.handle_input()
             self.game_logic()
