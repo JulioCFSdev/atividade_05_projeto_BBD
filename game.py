@@ -4,12 +4,14 @@ import ball
 from player import all_sprite, player
 from config import Config
 import brick
+from brick import power_up_sprites
 import sys
 
 # Shrinking class call characters
 conf = Config()
 paddler = player
 bricks = brick
+
 
 # Class to start our game
 class EldenBlocks:
@@ -31,7 +33,6 @@ class EldenBlocks:
         self.brick_2 = brick.create_stage_2()
         self.brick_3 = brick.create_stage_3()
         self.brick_boss = brick.create_boss_fight()
-
 
     # Main Menu:
     def Menu(self):
@@ -68,6 +69,7 @@ class EldenBlocks:
                         click = True
             pygame.display.update()
             self.clock.tick(conf.fps)
+
     # Game loop
     def main_loop(self):
         pygame.mixer.music.load("wall_dependencies/menu_song.mp3")
@@ -130,7 +132,6 @@ class EldenBlocks:
         money_condition = brick.money_up()
         if money_condition:
             self.score += 5
-            
 
     # Drawing the screen and its factors
     def draw(self):
@@ -151,6 +152,8 @@ class EldenBlocks:
         all_sprite.draw(self.screen)
         all_sprite.update()
         player.move()
+
+        power_up_sprites.draw(self.screen)
         # draw blocks
         brick.draw_bricks(self.screen)
         # draw power-ups (?)
