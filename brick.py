@@ -185,7 +185,6 @@ def draw_bricks(screen):
 # brick colission function
 def brick_collision(ball, velocity_0, velocity_1):
     n = 0
-    coli = False
     
     # Moving to the next stage
     if conf.all_bricks < 1:
@@ -218,12 +217,12 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_0 *= -1
             if block[3] != 1:
                 wall_block[n][3] -= 1
-                coli = True
+                 
                 
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-                coli = True
+                 
                 
         elif conf.power_ultra and ball.colliderect(block[0]):
             block[3] = 1
@@ -241,12 +240,12 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_1 = velocity_1
             if block[3] != 1:
                 wall_block[n][3] -= 1
-                coli = True
+                 
                 
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-                coli = True
+                 
 
         elif ball.colliderect(block[0]):
             # checking the collision side
@@ -263,12 +262,12 @@ def brick_collision(ball, velocity_0, velocity_1):
                 velocity_0 *= -1
             if block[3] != 1:
                 wall_block[n][3] -= 1
-                coli = True
+                 
                 
             else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-                coli = True
+                 
 
         n += 1
-    return [velocity_0, velocity_1, coli]
+    return [velocity_0, velocity_1]

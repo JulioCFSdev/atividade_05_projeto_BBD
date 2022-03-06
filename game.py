@@ -97,7 +97,7 @@ class EldenBlocks:
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
         # collision ball/paddler
-        self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler)
+        self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler, self.ball_velocity[0], self.ball_velocity[1])
         # collision ball/blocks
         self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0], self.ball_velocity[1])
         # left wall collision
@@ -107,14 +107,8 @@ class EldenBlocks:
         # upper wall collision
         self.ball_velocity[1] *= ball.upper_wall_collision(self.ball)
         # death point - (collision ball/wall down)
-<<<<<<< HEAD
-        self.ball_velocity[0] *= ball.lower_wall_collision(self.ball)
+        self.ball_velocity[0] *= ball.lower_wall_collision(self.ball, self.ball_velocity, self.ball_velocity[0], self.ball_velocity[1])
         # Score up
-        if self.ball_velocity[2]:
-            self.score += 5
-=======
-        self.ball_velocity = ball.lower_wall_collision(self.ball, self.ball_velocity)
->>>>>>> 133cd2922df06adadbd93ad671972aa2a3990a9a
 
     # Drawing the screen and its factors
     def draw(self):
