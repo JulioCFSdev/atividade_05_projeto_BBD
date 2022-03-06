@@ -4,7 +4,7 @@ import ball
 from player import all_sprite, player
 from config import Config
 import brick
-from brick import power_up_sprites
+from brick import power_up_sprites, powerups
 import sys
 
 # Shrinking class call characters
@@ -154,6 +154,11 @@ class EldenBlocks:
         player.move()
 
         power_up_sprites.draw(self.screen)
+
+        for powerup in powerups:
+            powerup.move()
+
         # draw blocks
         brick.draw_bricks(self.screen)
         # draw power-ups (?)
+
