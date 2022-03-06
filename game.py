@@ -43,7 +43,7 @@ class EldenBlocks:
         click = False
         while True:
             self.screen.fill((0, 0, 0))
-            self.screen.blit(conf.bg_main_1, (0, 0))
+            self.screen.blit(conf.bg_menu, (0, 0))
             self.screen.blit(menu_txt, ((conf.screen_width / 2) - 150, 40))
             mx, my = pygame.mouse.get_pos()
 
