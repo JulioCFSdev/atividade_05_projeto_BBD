@@ -9,7 +9,7 @@ class Config:
         # Background
         self.bg_name = "Blocks Age"
         self.coord_bg = [0, 0]
-        self.bg_main_1 = pygame.image.load("wall_dependencies/bg.png")
+        self.bg_main_1 = pygame.image.load("wall_dependencies/bg1.png")
         self.bg_menu = pygame.image.load("wall_dependencies/bg.png")
         # Fonts and Texts
         self.font2 = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
