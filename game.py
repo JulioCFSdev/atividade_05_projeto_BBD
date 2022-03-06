@@ -20,6 +20,7 @@ class EldenBlocks:
     def __init__(self):
         self.score = 0
         self.lives = 3
+        self.stage = [1, False]
         self.clock = pygame.time.Clock()
         self.ball = ball.create_ball()
         self.ball_speed_x = 3
@@ -89,7 +90,7 @@ class EldenBlocks:
                 conf.time_counter -= 1
                 conf.time_text = str(conf.time_counter).rjust(
                     3) if conf.time_counter > 0 else "X"
-            if conf.time_text == "X":
+            if conf.time_text == "X" or self.lives == 0:
                 game_over_text = conf.font.render("GAME OVER", True, (255, 255, 255))
                 self.screen.blit(game_over_text, (conf.screen_width / 2 - 100, conf.screen_height / 2))
                 pygame.display.flip()
@@ -118,7 +119,7 @@ class EldenBlocks:
                                                     self.ball_speed_x, self.ball_speed_y)
         # collision ball/blocks
         self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0],
-                                                   self.ball_velocity[1])
+                                                   self.ball_velocity[1], self.stage[0])
         # left wall collision
         self.ball_velocity[0] *= ball.left_wall_collision(self.ball)
         # right wall collision
@@ -130,8 +131,22 @@ class EldenBlocks:
                                                        self.ball_speed_x, self.ball_speed_y)
         # Money up
         money_condition = brick.money_up()
-        if money_condition:
+        if money_condition == 1:
             self.score += 5
+        elif money_condition > 1:
+            self.score += 10
+
+        self.stage = brick.next_stage()
+
+        # Stage win screen
+        if self.stage[1]:
+            stage_clear_text = conf.font.render("STAGE CLEAR", True, conf.white)
+            self.screen.blit(stage_clear_text, (conf.screen_width / 2 - 100, conf.screen_height / 2))
+            pygame.display.flip()
+            pygame.time.wait(2000)
+            self.stage[1] = False
+            conf.time_counter = 180
+
 
     # Drawing the screen and its factors
     def draw(self):

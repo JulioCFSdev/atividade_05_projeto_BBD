@@ -188,28 +188,28 @@ def draw_bricks(screen):
 
 
 # brick colission function
-def brick_collision(ball, velocity_0, velocity_1):
+def brick_collision(ball, velocity_0, velocity_1, stage):
     n = 0
-    conf.money_up = False
+    conf.money_up = 0
 
     # Moving to the next stage
     if conf.all_bricks < 1:
         conf.stage += 1
+        conf.stage_clear = True
         conf.all_bricks = 100
 
     # Determining which block wall to check
-    if conf.stage == 1:
+    if stage == 1:
         wall_block = conf.block_list_1
-    elif conf.stage == 2:
+    elif stage == 2:
         wall_block = conf.block_list_2
-    elif conf.stage == 3:
+    elif stage == 3:
         wall_block = conf.block_list_3
-    elif conf.stage == 4:
+    elif stage == 4:
         wall_block = conf.block_list_boss
 
     for block in wall_block:
         if conf.power_gyro and ball.colliderect(block[0]):
-            block[3] = 1
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 *= -1
             # bottom collision
@@ -221,15 +221,16 @@ def brick_collision(ball, velocity_0, velocity_1):
             # left collision
             elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                 velocity_0 *= -1
-            if block[3] != 1:
-                wall_block[n][3] -= 1
-                conf.money_up = True
 
-
-            else:
-                wall_block.remove(block)
-                conf.all_bricks -= 1
-                conf.money_up = True
+            if block[2] == 0 or block[2] == 3:
+                conf.money_up = 1
+            elif block[2] == 1:
+                conf.money_up = 2
+            elif block[2] == 2:
+                conf.money_up == 3
+            
+            wall_block.remove(block)
+            conf.all_bricks -= 1
 
 
         elif conf.power_ultra and ball.colliderect(block[0]):
@@ -246,15 +247,16 @@ def brick_collision(ball, velocity_0, velocity_1):
             # left collision
             elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                 velocity_1 = velocity_1
-            if block[3] != 1:
-                wall_block[n][3] -= 1
-                conf.money_up = True
 
+            if block[2] == 0 or block[2] == 3:
+                conf.money_up = 1
+            elif block[2] == 1:
+                conf.money_up = 2
+            elif block[2] == 2:
+                conf.money_up == 3
 
-            else:
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-                conf.money_up = True
 
 
         elif ball.colliderect(block[0]):
@@ -277,15 +279,19 @@ def brick_collision(ball, velocity_0, velocity_1):
                 powerups.append(powerup)
                 power_up_sprites.add(powerup)
 
-
             if block[3] != 1:
                 wall_block[n][3] -= 1
-                conf.money_up = True
 
             else:
+                if block[2] == 0 or block[2] == 3:
+                    conf.money_up = 1
+                elif block[2] == 1:
+                    conf.money_up = 2
+                elif block[2] == 2:
+                    conf.money_up == 3
+
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-                conf.money_up = True
 
         n += 1
     return [velocity_0, velocity_1]
@@ -293,3 +299,11 @@ def brick_collision(ball, velocity_0, velocity_1):
 
 def money_up():
     return conf.money_up
+
+
+def next_stage():
+    if conf.stage_clear == True:
+        conf.stage_clear = False
+        return [conf.stage, True]
+        
+    return [conf.stage, conf.stage_clear]

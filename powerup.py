@@ -14,7 +14,8 @@ class PowerUp(pygame.sprite.Sprite):
         self.image = self.sprites[self.actual]
         self.image = pygame.transform.scale(self.image, (32 * 5, 32 * 5))
         self.rect = self.image.get_rect()
-        self.speed_y = 3
+        self.rect.topleft = [self.x, self.y]
+        self.speed_y = 2
 
     def move(self):
         self.rect.y += self.speed_y
