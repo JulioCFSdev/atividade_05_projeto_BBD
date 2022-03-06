@@ -1,7 +1,7 @@
 import pygame
 import wall
 import ball
-from player import all_sprite, player
+from player import all_sprite, player, player_power_up_collision
 from config import Config
 import brick
 from brick import power_up_sprites, powerups
@@ -129,6 +129,8 @@ class EldenBlocks:
         # death point - (collision ball/wall down)
         self.ball_velocity = ball.lower_wall_collision(self.ball, self.ball_velocity,
                                                        self.ball_speed_x, self.ball_speed_y)
+        # powerups collision
+        player_power_up_collision(player)
         # Money up
         money_condition = brick.money_up()
         if money_condition == 1:
@@ -168,12 +170,11 @@ class EldenBlocks:
         all_sprite.update()
         player.move()
 
+        # draw blocks
+        brick.draw_bricks(self.screen)
+
+        # power ups
         power_up_sprites.draw(self.screen)
 
         for powerup in powerups:
             powerup.move()
-
-        # draw blocks
-        brick.draw_bricks(self.screen)
-        # draw power-ups (?)
-
