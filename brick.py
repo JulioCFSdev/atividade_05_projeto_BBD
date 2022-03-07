@@ -211,6 +211,7 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
 
     for block in wall_block:
         if power_gyro[2] and ball.colliderect(block[0]):
+            conf.power_ultra = False
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 *= -1
             # bottom collision
@@ -235,7 +236,7 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
 
 
         elif power_ultra[3] and ball.colliderect(block[0]):
-
+            conf.power_gyro = False
             # checking the collision side
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 = velocity_1
@@ -288,7 +289,7 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
                 elif block[2] == 1:
                     conf.money_up = 2
                 elif block[2] == 2:
-                    conf.money_up == 3
+                    conf.money_up = 3
 
                 wall_block.remove(block)
                 conf.all_bricks -= 1
