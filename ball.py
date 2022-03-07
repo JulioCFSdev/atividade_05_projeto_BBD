@@ -60,9 +60,9 @@ def upper_wall_collision(ball):
         return conf.normal_speed
 
 
-def paddler_collision(ball, velocity, paddler, speedx, speedy):
-    if conf.power_growth:
-        print(conf.power_growth)
+def paddler_collision(ball, velocity, paddler, speedx, speedy, power_growth):
+    if power_growth[0]:
+        print("CACAU")
         # velocity A left
         if paddler.rect.x < ball.x < paddler.rect.x + 40*1.5 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:
@@ -87,7 +87,6 @@ def paddler_collision(ball, velocity, paddler, speedx, speedy):
         else:
             return velocity
     else:
-        print(conf.power_growth)
         # velocity A left
         if paddler.rect.x < ball.x < paddler.rect.x + 40 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:

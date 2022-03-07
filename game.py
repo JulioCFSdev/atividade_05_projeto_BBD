@@ -1,7 +1,7 @@
 import pygame
 import wall
 import ball
-from player import all_sprite, player, player_power_up_collision
+from player import all_sprite, player, player_power_up_collision, power_up_on
 from config import Config
 import brick
 from brick import power_up_sprites, powerups
@@ -114,9 +114,10 @@ class EldenBlocks:
             conf.power_freeze = False
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
+        self.power_ups = power_up_on()
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,
-                                                    self.ball_speed_x, self.ball_speed_y)
+                                                    self.ball_speed_x, self.ball_speed_y, self.power_ups)
         # collision ball/blocks
         self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0],
                                                    self.ball_velocity[1], self.stage[0])

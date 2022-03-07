@@ -29,6 +29,7 @@ class Config:
         # Power up variables
         self.power_freeze = False
         self.power_fire = False
+        self.power_growth = False
         self.power_gyro = False
         self.power_ultra = False
         # Line size on sides and top
@@ -59,7 +60,7 @@ class Config:
         self.col_bricks_3 = 1
         self.row_bricks_boss = 1
         self.col_bricks_boss = 1
-        self.all_bricks = 5
+        self.all_bricks = 50
         self.block_width = 50
         self.block_height = 25
         self.block_individual_1 = []

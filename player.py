@@ -20,7 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.sprites_3.append(pygame.image.load('Player_sprite/l0_sprite_3.png'))
         self.actual = 0
         self.image = self.sprites_1[self.actual]
-        self.image = pygame.transform.scale(self.image, (32*conf.size, 32*5))
+        self.image = pygame.transform.scale(self.image, (conf.player_width, 32*5))
         self.speed = 10
         self.direction = 0
 
@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
             if self.actual >= len(self.sprites_1):
                 self.actual = 0
             self.image = self.sprites_1[int(self.actual)]
-            self.image = pygame.transform.scale(self.image, (32 * conf.size, 32 * 5))
+            self.image = pygame.transform.scale(self.image, (conf.player_width, 32 * 5))
 
     def move(self):
             self.direction = 0
@@ -44,7 +44,7 @@ class Player(pygame.sprite.Sprite):
                 if self.actual >= len(self.sprites_3):
                     self.actual = 0
                 self.image = self.sprites_3[int(self.actual)]
-                self.image = pygame.transform.scale(self.image, (32 * conf.size, 32 * 5))
+                self.image = pygame.transform.scale(self.image, (conf.player_width, 32 * 5))
 
             if key[pygame.K_RIGHT]:
                 self.rect.x += self.speed
@@ -55,7 +55,7 @@ class Player(pygame.sprite.Sprite):
                 if self.actual >= len(self.sprites_2):
                     self.actual = 0
                 self.image = self.sprites_2[int(self.actual)]
-                self.image = pygame.transform.scale(self.image, (32 * conf.size, 32 * 5))
+                self.image = pygame.transform.scale(self.image, (conf.player_width, 32 * 5))
 
 
 all_sprite = pygame.sprite.Group()
@@ -69,6 +69,11 @@ def player_power_up_collision(player1):
             power_up_sprites.remove(powerup)
             if powerup.power == 0 and conf.power_growth == False:
                 conf.power_growth = True
-                conf.size *= 1.5
+                conf.player_width *= 1.2
             if powerup.power == 1 and conf.power_freeze == False:
                 conf.power_freeze = True
+            
+
+
+def power_up_on():
+    return [conf.power_growth, conf.power_freeze]
