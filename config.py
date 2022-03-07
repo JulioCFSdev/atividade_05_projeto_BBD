@@ -34,6 +34,7 @@ class Config:
         self.power_fire = False
         self.power_growth = False
         self.power_gyro = False
+        self.power_mult = False
         self.power_ultra = False
         # Line size on sides and top
         self.line_size = 12
