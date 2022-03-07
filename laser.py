@@ -16,5 +16,7 @@ class Laser(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=pos)
         self.speed = 8
 
+        
     def update(self):
         self.rect.y -= self.speed
+ 
