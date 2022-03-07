@@ -56,8 +56,10 @@ class Config:
         self.ball_x_init = 500
         self.ball_y_init = 400
         # Block values (Coluns and rows, dimensions, list)
-        self.row_bricks_1 = 10
-        self.col_bricks_1 = 19
+        self.row_bricks_1 = 6
+        self.col_bricks_1 = 7
+        self.row_bricks_11 = 6
+        self.col_bricks_11 = 7
         self.row_bricks_2 = 1
         self.col_bricks_2 = 1
         self.row_bricks_3 = 1
