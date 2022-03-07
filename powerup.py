@@ -16,7 +16,8 @@ class PowerUp(pygame.sprite.Sprite):
         self.sprites.append(pygame.image.load('Powerup_sprites/sprite_multiballs.png'))
         self.sprites.append(pygame.image.load('Powerup_life/sprite_life1.png'))
         self.sprites.append(pygame.image.load('Powerup_small/sprite_small1.png'))
-        self.power = random.randint(0, 5)
+        self.sprites.append(pygame.image.load('Powerup_sprites/sprite_shoot.png'))
+        self.power = random.randint(0, 6)
         self.x = coordx
         self.y = coordy
         self.image = self.sprites[self.power]

@@ -117,8 +117,8 @@ class EldenBlocks:
         self.power_ups = power_up_on()
 
         if self.power_ups[4]:
-            self.lives += 1
             conf1.extra_life = False
+            self.lives += 1
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
 

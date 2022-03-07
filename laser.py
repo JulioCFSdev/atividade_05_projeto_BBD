@@ -7,9 +7,9 @@ class Laser(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
         self.laser = []
-        self.laser.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
+        self.laser.append(pygame.image.load('Powerup_sprites/sprite_shoot.png'))
         self.image = self.laser[0]
-        self.image = pygame.transform.scale(self.image, (32, 32))
+        self.image = pygame.transform.scale(self.image, (60, 60))
         self.rect = self.image.get_rect(center = pos)
         self.speed = 8
 

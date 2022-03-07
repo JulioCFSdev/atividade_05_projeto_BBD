@@ -2,7 +2,6 @@ import config
 import pygame
 from pygame.locals import *
 from brick import powerups, power_up_sprites
-import game
 from laser import Laser
 
 conf1 = config.Config()
@@ -62,8 +61,9 @@ class Player(pygame.sprite.Sprite):
             self.image = self.sprites_2[int(self.actual)]
             self.image = pygame.transform.scale(self.image, (conf1.player_width, 32 * 5))
 
-        elif key[pygame.K_SPACE]:
+        elif key[pygame.K_SPACE] and conf1.power_shot:
             self.lasers.add(Laser(player.rect.center))
+            pygame.time.wait(1)
 
 
 all_sprite = pygame.sprite.Group()
@@ -79,6 +79,8 @@ def player_power_up_collision(player1, stage_clear):
         conf1.power_mult = False
         conf1.power_ultra = False
         conf1.extra_life = False
+        conf1.power_small = False
+        conf1.power_shot = False
 
     for powerup in powerups:
         if pygame.sprite.collide_mask(powerup, player1):
@@ -97,9 +99,11 @@ def player_power_up_collision(player1, stage_clear):
             if powerup.power == 5 and conf1.power_small == False:
                 conf1.power_small = True
                 conf1.player_width /= 1.2
+            if powerup.power == 6 and conf1.power_shot == False:
+                conf1.power_shot = True
 
 
 
 def power_up_on():
     return [conf1.power_growth, conf1.power_gyro, conf1.power_ultra,
-            conf1.power_mult, conf1.extra_life]
+            conf1.power_mult, conf1.extra_life, conf1.power_small, conf1.power_shot]

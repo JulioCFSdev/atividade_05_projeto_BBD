@@ -1,4 +1,3 @@
-from distutils.command.config import config
 import pygame
 import pygame.locals
 from config import Config

@@ -1,8 +1,5 @@
-from cmath import rect
 import pygame
 import config
-from laser import Laser
-import player
 from powerup import PowerUp
 
 
@@ -224,8 +221,8 @@ def draw_bricks(screen):
                 color = conf.blue
             elif block[2] == 0:
                 color = conf.yellow
-                if conf.stage == 4:
-                    color = conf.orange
+            if conf.stage == 4:
+                color = conf.orange
         elif block[3] == 2:
             color = conf.green
         elif block[3] == 3:
@@ -305,6 +302,11 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
             elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                 velocity_1 = velocity_1
 
+            if block[2] == 3:
+                    powerup = PowerUp(block[0].x, block[0].y)
+                    powerups.append(powerup)
+                    power_up_sprites.add(powerup)
+
             if block[2] == 0 or block[2] == 3:
                 conf.money_up = 1
             elif block[2] == 1:
@@ -342,6 +344,11 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
                 # left collision
                 elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                     velocity_0 *= -1
+
+                if block[2] == 3:
+                    powerup = PowerUp(block[0].x, block[0].y)
+                    powerups.append(powerup)
+                    power_up_sprites.add(powerup)
 
                 if block[2] == 0 or block[2] == 3:
                     conf.money_up = 1
@@ -413,10 +420,12 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
                     wall_block.remove(block)
                     conf.all_bricks -= 1
             for shot in laser:
+                p = 0
                 if block[0].x - conf.block_width < shot.rect.x < block[0].x + conf.block_width and \
                         block[0].y < shot.rect.y + conf.block_height < block[0].y + conf.block_height:
                     if block[3] != 1:
                         wall_block[n][3] -= 1
+                        shot.kill()
 
                     else:
                         if block[2] == 0 or block[2] == 3:
@@ -428,7 +437,8 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
 
                         wall_block.remove(block)
                         conf.all_bricks -= 1
-
+                        shot.kill()
+                p += 1
         n += 1
     return [velocity_0, velocity_1]
 
