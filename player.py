@@ -61,9 +61,10 @@ class Player(pygame.sprite.Sprite):
                 self.actual = 0
             self.image = self.sprites_2[int(self.actual)]
             self.image = pygame.transform.scale(self.image, (conf1.player_width, 32 * 5))
-        
+
         elif key[pygame.K_SPACE]:
             self.lasers.add(Laser(player.rect.center))
+
 
 all_sprite = pygame.sprite.Group()
 player = Player()
@@ -85,14 +86,19 @@ def player_power_up_collision(player1, stage_clear):
             if powerup.power == 0 and conf1.power_growth == False:
                 conf1.power_growth = True
                 conf1.player_width *= 1.2
-            if powerup.power == 3 and conf1.power_gyro == False:
+            if powerup.power == 1 and conf1.power_gyro == False:
                 conf1.power_gyro = True
-            if powerup.power == 4 and conf1.power_ultra == False:
+            if powerup.power == 2 and conf1.power_ultra == False:
                 conf1.power_ultra = True
-            if powerup.power == 5:
+            if powerup.power == 3:
                 conf1.power_mult = True
-            if powerup.power == 6:
+            if powerup.power == 4:
                 conf1.extra_life = True
+            if powerup.power == 5 and conf1.power_small == False:
+                conf1.power_small = True
+                conf1.player_width /= 1.2
+
+
 
 def power_up_on():
     return [conf1.power_growth, conf1.power_gyro, conf1.power_ultra,
