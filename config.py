@@ -32,10 +32,10 @@ class Config:
         self.power_growth = False
         self.power_freeze = False
         self.power_fire = False
-        self.power_growth = False
         self.power_gyro = False
         self.power_mult = False
         self.power_ultra = False
+        self.extra_life = False
         # Line size on sides and top
         self.line_size = 12
         # Time related values
@@ -56,7 +56,7 @@ class Config:
         self.ball_x_init = 500
         self.ball_y_init = 400
         # Block values (Coluns and rows, dimensions, list)
-        self.row_bricks_1 = 6
+        self.row_bricks_1 = 10
         self.col_bricks_1 = 19
         self.row_bricks_2 = 1
         self.col_bricks_2 = 1
@@ -102,3 +102,4 @@ class Config:
         self.powerup = 1
 
         self.size = 5
+
