@@ -9,17 +9,17 @@ def hud_score(display, size, pos_money_icon_var, score_value, pos_score_value_va
     text = conf.font2.render("💰", True, conf.white)
     display.blit(text, (size - (size / pos_money_icon_var), 1))  # 1.05
     text2 = conf.font.render(":  " + str(score_value), True, conf.white)
-    display.blit(text2, (size - (size / pos_score_value_var), 2))  # 1.15
-    
+    display.blit(text2, (size - (size / pos_score_value_var + 70), -15))  # 1.15
+
     # MAIN SETTING = hud_score(screen, width, 1.05, 1.15)
 
-    
+
 def hud_lives(display, size, pos_lives_icon_var, life_value, pos_lives_value_var):
     text = conf.font2.render("💕", True, conf.white)
     display.blit(text, (size / pos_lives_icon_var, 1))  # 2.35
     text2 = conf.font.render(": " + str(life_value), True, conf.white)
-    display.blit(text2, (size - (size / pos_lives_value_var), 1))  # 2
-    
+    display.blit(text2, (size - (size / pos_lives_value_var), -15))  # 2
+
     # MAIN SETTING = hud_lives(screen, width, 2.35, 2)
 
 
@@ -27,8 +27,8 @@ def hud_time(display, size, pos_time_icon_var, time_value, pos_time_value_var):
     text = conf.font2.render("⏱", True, conf.white)
     display.blit(text, (size - (size / pos_time_icon_var), 1))  # 4
     time_txt = conf.font.render(": " + time_value, True, conf.white)
-    display.blit(time_txt, (size - (size / pos_time_value_var), 1))  # 5.5
-    
+    display.blit(time_txt, (size - (size / pos_time_value_var), -15))  # 5.5
+
     # MAIN SETTING = hud_time(screen, width, 4, time_text, 5.5)
 
 
