@@ -89,24 +89,30 @@ def create_stage_1():
 def create_stage_2():
     for row in range(conf.row_bricks_2):
         for col in range(conf.col_bricks_2):
-            block_x = col * conf.block_width + 20
-            block_y = row * conf.block_height + 100
+            block_x = col * conf.block_width + 17
+            block_y = row * conf.block_height + 80
 
             score = 5
 
             # Determining block types
             if row == 9:
-                block_type = 0
-            elif row == 8:
                 block_type = 1
+            elif row == 8:
+                block_type = 2
             elif row == 7:
                 block_type = 3
             elif row == 6:
                 block_type = 0
             elif row == 5:
-                block_type = 1
+                block_type = 0
             elif row == 4:
-                block_type = 3
+                block_type = 2
+            elif row == 3:
+                block_type = 1
+            elif row == 2:
+                block_type = 1
+            elif row == 1:
+                block_type = 0
             else:
                 block_type = 2
 
@@ -122,6 +128,46 @@ def create_stage_2():
             conf.block_individual_2 = [block, score, block_type, block_life]
             conf.block_list_2.append(conf.block_individual_2)
 
+    for row in range(conf.row_bricks_22):
+        for col in range(conf.col_bricks_22):
+            block_x = col * conf.block_width + 485
+            block_y = row * conf.block_height + 230
+
+            score = 5
+
+            # Determining block types
+            if row == 9:
+                block_type = 1
+            elif row == 8:
+                block_type = 2
+            elif row == 7:
+                block_type = 3
+            elif row == 6:
+                block_type = 0
+            elif row == 5:
+                block_type = 0
+            elif row == 4:
+                block_type = 2
+            elif row == 3:
+                block_type = 1
+            elif row == 2:
+                block_type = 1
+            elif row == 1:
+                block_type = 0
+            else:
+                block_type = 2
+
+            # Determining the life of blocks
+            if block_type == 0 or block_type == 3:
+                block_life = 1
+            elif block_type == 1:
+                block_life = 2
+            else:
+                block_life = 3
+
+            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            conf.block_individual_2 = [block, score, block_type, block_life]
+            conf.block_list_2.append(conf.block_individual_2)
 
 # Create the wall blocks stage 3
 def create_stage_3():
