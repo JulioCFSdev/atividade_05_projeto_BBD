@@ -36,7 +36,6 @@ def create_stage_1():
                 block_type = 0
             else:
                 block_type = 2
-
             # Determining the life of blocks
             if block_type == 0 or block_type == 3:
                 block_life = 1
@@ -44,11 +43,11 @@ def create_stage_1():
                 block_life = 2
             else:
                 block_life = 3
-
-            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            block = pygame.Rect(
+                block_x, block_y, conf.block_width, conf.block_height
+            )
             conf.block_individual_1 = [block, score, block_type, block_life]
             conf.block_list_1.append(conf.block_individual_1)
-
     for row in range(conf.row_bricks_11):
         for col in range(conf.col_bricks_11):
             block_x = col * conf.block_width + 645
@@ -73,7 +72,6 @@ def create_stage_1():
                 block_type = 0
             else:
                 block_type = 2
-
             # Determining the life of blocks
             if block_type == 0 or block_type == 3:
                 block_life = 1
@@ -81,10 +79,12 @@ def create_stage_1():
                 block_life = 2
             else:
                 block_life = 3
-
-            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            block = pygame.Rect(
+                block_x, block_y, conf.block_width, conf.block_height
+            )
             conf.block_individual_1 = [block, score, block_type, block_life]
             conf.block_list_1.append(conf.block_individual_1)
+
 
 # Create the wall blocks stage 2
 def create_stage_2():
@@ -112,7 +112,6 @@ def create_stage_2():
                 block_type = 0
             else:
                 block_type = 2
-
             # Determining the life of blocks
             if block_type == 0 or block_type == 3:
                 block_life = 1
@@ -120,11 +119,11 @@ def create_stage_2():
                 block_life = 2
             else:
                 block_life = 3
-
-            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            block = pygame.Rect(
+                block_x, block_y, conf.block_width, conf.block_height
+            )
             conf.block_individual_2 = [block, score, block_type, block_life]
             conf.block_list_2.append(conf.block_individual_2)
-
     for row in range(conf.row_bricks_22):
         for col in range(conf.col_bricks_22):
             block_x = col * conf.block_width + 485
@@ -149,7 +148,6 @@ def create_stage_2():
                 block_type = 0
             else:
                 block_type = 2
-
             # Determining the life of blocks
             if block_type == 0 or block_type == 3:
                 block_life = 1
@@ -157,10 +155,12 @@ def create_stage_2():
                 block_life = 2
             else:
                 block_life = 3
-
-            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            block = pygame.Rect(
+                block_x, block_y, conf.block_width, conf.block_height
+            )
             conf.block_individual_2 = [block, score, block_type, block_life]
             conf.block_list_2.append(conf.block_individual_2)
+
 
 # Create the wall blocks stage 3
 def create_stage_3():
@@ -192,7 +192,6 @@ def create_stage_3():
                 block_type = 0
             else:
                 block_type = 2
-
             # Determining the life of blocks
             if block_type == 0 or block_type == 3:
                 block_life = 1
@@ -200,11 +199,11 @@ def create_stage_3():
                 block_life = 2
             else:
                 block_life = 3
-
-            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            block = pygame.Rect(
+                block_x, block_y, conf.block_width, conf.block_height
+            )
             conf.block_individual_3 = [block, score, block_type, block_life]
             conf.block_list_3.append(conf.block_individual_3)
-
     for row in range(conf.row_bricks_33):
         for col in range(conf.col_bricks_33):
             block_x = col * conf.block_width + 30
@@ -221,7 +220,6 @@ def create_stage_3():
                 block_type = 1
             else:
                 block_type = 2
-
             # Determining the life of blocks
             if block_type == 0 or block_type == 3:
                 block_life = 1
@@ -229,8 +227,9 @@ def create_stage_3():
                 block_life = 2
             else:
                 block_life = 3
-
-            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            block = pygame.Rect(
+                block_x, block_y, conf.block_width, conf.block_height
+            )
             conf.block_individual_3 = [block, score, block_type, block_life]
             conf.block_list_3.append(conf.block_individual_3)
 
@@ -264,15 +263,15 @@ def create_stage_4():
                 block_type = 4
             else:
                 block_type = 5
-            
             if block_type == 4:
                 block_life = 1
             else:
                 block_life = 999
-
             score = 5
 
-            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            block = pygame.Rect(
+                block_x, block_y, conf.block_width, conf.block_height
+            )
             conf.block_individual_boss = [block, score, block_type, block_life]
             conf.block_list_boss.append(conf.block_individual_boss)
 
@@ -302,13 +301,14 @@ def draw_bricks(screen):
             color = conf.red
         if conf.stage == 4 and block[3] > 3:
             color = conf.gray
-
         pygame.draw.rect(screen, color, block[0])
         pygame.draw.rect(screen, conf.black, (block[0]), 1)
 
 
 # brick colission function
-def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, power_ultra):
+def brick_collision(
+    ball, laser, velocity_0, velocity_1, stage, power_gyro, power_ultra
+):
     n = 0
     conf.money_up = 0
 
@@ -317,7 +317,6 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
         conf.stage += 1
         conf.stage_clear = True
         conf.all_bricks = 100
-
     # Determining which block wall to check
     if stage == 1:
         wall_block = conf.block_list_1
@@ -327,161 +326,204 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
         wall_block = conf.block_list_3
     elif stage == 4:
         wall_block = conf.block_list_boss
-
     for block in wall_block:
         if power_gyro[1] and ball.colliderect(block[0]):
             conf.power_ultra = False
-            if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+            if (
+                abs(block[0].y - (ball.y + conf.ball_heigth)) < 5
+                and velocity_1 > 0
+            ):
                 velocity_1 *= -1
             # bottom collision
-            elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+            elif (
+                abs((block[0].y + conf.block_height) - ball.y) < 5
+                and velocity_1 < 0
+            ):
                 velocity_1 *= -1
             # right collision
-            elif abs(block[0].x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+            elif (
+                abs(block[0].x - (ball.x + conf.ball_width)) < 5
+                and velocity_0 > 0
+            ):
                 velocity_0 *= -1
             # left collision
-            elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+            elif (
+                abs((block[0].x + conf.block_width) - ball.x) < 5
+                and velocity_0 < 0
+            ):
                 velocity_0 *= -1
-
             if block[2] == 3:
                 powerup = PowerUp(block[0].x, block[0].y)
                 powerups.append(powerup)
                 power_up_sprites.add(powerup)
-
-
             if block[2] == 0 or block[2] == 3:
                 conf.money_up = 1
             elif block[2] == 1:
                 conf.money_up = 2
             elif block[2] == 2:
                 conf.money_up = 3
-
             wall_block.remove(block)
             conf.all_bricks -= 1
-
-
         elif power_ultra[2] and ball.colliderect(block[0]):
             conf.power_gyro = False
             # checking the collision side
-            if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+            if (
+                abs(block[0].y - (ball.y + conf.ball_heigth)) < 5
+                and velocity_1 > 0
+            ):
                 velocity_1 = velocity_1
             # bottom collision
-            elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+            elif (
+                abs((block[0].y + conf.block_height) - ball.y) < 5
+                and velocity_1 < 0
+            ):
                 velocity_1 = velocity_1
             # right collision
-            elif abs(block[0].x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+            elif (
+                abs(block[0].x - (ball.x + conf.ball_width)) < 5
+                and velocity_0 > 0
+            ):
                 velocity_1 = velocity_1
             # left collision
-            elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+            elif (
+                abs((block[0].x + conf.block_width) - ball.x) < 5
+                and velocity_0 < 0
+            ):
                 velocity_1 = velocity_1
-
             if block[2] == 3:
-                    powerup = PowerUp(block[0].x, block[0].y)
-                    powerups.append(powerup)
-                    power_up_sprites.add(powerup)
-
+                powerup = PowerUp(block[0].x, block[0].y)
+                powerups.append(powerup)
+                power_up_sprites.add(powerup)
             if block[2] == 0 or block[2] == 3:
                 conf.money_up = 1
             elif block[2] == 1:
                 conf.money_up = 2
             elif block[2] == 2:
                 conf.money_up = 3
-
             wall_block.remove(block)
             conf.all_bricks -= 1
-
-
         elif conf.stage == 4 and ball.colliderect(block[0]):
             # checking the collision side
-            if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
-                    velocity_1 *= -1
+            if (
+                abs(block[0].y - (ball.y + conf.ball_heigth)) < 5
+                and velocity_1 > 0
+            ):
+                velocity_1 *= -1
             # bottom collision
-            elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
-                    velocity_1 *= -1
-            # explosion block        
+            elif (
+                abs((block[0].y + conf.block_height) - ball.y) < 5
+                and velocity_1 < 0
+            ):
+                velocity_1 *= -1
+            # explosion block
             if block[2] == 4:
-                for remover in range(len(wall_block) - 1, len(wall_block) - 20, -1):
+                for remover in range(
+                    len(wall_block) - 1, len(wall_block) - 20, -1
+                ):
                     wall_block.remove(wall_block[remover])
-
         elif conf.stage != 4:
             if power_gyro[2] and ball.colliderect(block[0]):
                 conf.power_ultra = False
-                if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+                if (
+                    abs(block[0].y - (ball.y + conf.ball_heigth)) < 5
+                    and velocity_1 > 0
+                ):
                     velocity_1 *= -1
                 # bottom collision
-                elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+                elif (
+                    abs((block[0].y + conf.block_height) - ball.y) < 5
+                    and velocity_1 < 0
+                ):
                     velocity_1 *= -1
                 # right collision
-                elif abs(block[0].x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+                elif (
+                    abs(block[0].x - (ball.x + conf.ball_width)) < 5
+                    and velocity_0 > 0
+                ):
                     velocity_0 *= -1
                 # left collision
-                elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+                elif (
+                    abs((block[0].x + conf.block_width) - ball.x) < 5
+                    and velocity_0 < 0
+                ):
                     velocity_0 *= -1
-
                 if block[2] == 3:
                     powerup = PowerUp(block[0].x, block[0].y)
                     powerups.append(powerup)
                     power_up_sprites.add(powerup)
-
                 if block[2] == 0 or block[2] == 3:
                     conf.money_up = 1
                 elif block[2] == 1:
                     conf.money_up = 2
                 elif block[2] == 2:
                     conf.money_up = 3
-
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-
-
             elif power_ultra[3] and ball.colliderect(block[0]):
                 conf.power_gyro = False
                 # checking the collision side
-                if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+                if (
+                    abs(block[0].y - (ball.y + conf.ball_heigth)) < 5
+                    and velocity_1 > 0
+                ):
                     velocity_1 = velocity_1
                 # bottom collision
-                elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+                elif (
+                    abs((block[0].y + conf.block_height) - ball.y) < 5
+                    and velocity_1 < 0
+                ):
                     velocity_1 = velocity_1
                 # right collision
-                elif abs(block[0].x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+                elif (
+                    abs(block[0].x - (ball.x + conf.ball_width)) < 5
+                    and velocity_0 > 0
+                ):
                     velocity_1 = velocity_1
                 # left collision
-                elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+                elif (
+                    abs((block[0].x + conf.block_width) - ball.x) < 5
+                    and velocity_0 < 0
+                ):
                     velocity_1 = velocity_1
-
                 if block[2] == 0 or block[2] == 3:
                     conf.money_up = 1
                 elif block[2] == 1:
                     conf.money_up = 2
                 elif block[2] == 2:
                     conf.money_up = 3
-
                 wall_block.remove(block)
                 conf.all_bricks -= 1
-
-
             elif ball.colliderect(block[0]):
                 # checking the collision side
-                if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+                if (
+                    abs(block[0].y - (ball.y + conf.ball_heigth)) < 5
+                    and velocity_1 > 0
+                ):
                     velocity_1 *= -1
                 # bottom collision
-                elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+                elif (
+                    abs((block[0].y + conf.block_height) - ball.y) < 5
+                    and velocity_1 < 0
+                ):
                     velocity_1 *= -1
                 # right collision
-                elif abs(block[0].x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+                elif (
+                    abs(block[0].x - (ball.x + conf.ball_width)) < 5
+                    and velocity_0 > 0
+                ):
                     velocity_0 *= -1
                 # left collision
-                elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+                elif (
+                    abs((block[0].x + conf.block_width) - ball.x) < 5
+                    and velocity_0 < 0
+                ):
                     velocity_0 *= -1
-
                 if block[2] == 3:
                     powerup = PowerUp(block[0].x, block[0].y)
                     powerups.append(powerup)
                     power_up_sprites.add(powerup)
-
                 if block[3] != 1:
                     wall_block[n][3] -= 1
-
                 else:
                     if block[2] == 0 or block[2] == 3:
                         conf.money_up = 1
@@ -489,17 +531,21 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
                         conf.money_up = 2
                     elif block[2] == 2:
                         conf.money_up = 3
-
                     wall_block.remove(block)
                     conf.all_bricks -= 1
             for shot in laser:
                 p = 0
-                if block[0].x - conf.block_width < shot.rect.x < block[0].x + conf.block_width and \
-                        block[0].y < shot.rect.y + conf.block_height < block[0].y + conf.block_height:
+                if (
+                    block[0].x - conf.block_width
+                    < shot.rect.x
+                    < block[0].x + conf.block_width
+                    and block[0].y
+                    < shot.rect.y + conf.block_height
+                    < block[0].y + conf.block_height
+                ):
                     if block[3] != 1:
                         wall_block[n][3] -= 1
                         shot.kill()
-
                     else:
                         if block[2] == 0 or block[2] == 3:
                             conf.money_up = 1
@@ -507,7 +553,6 @@ def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, powe
                             conf.money_up = 2
                         elif block[2] == 2:
                             conf.money_up = 3
-
                         wall_block.remove(block)
                         conf.all_bricks -= 1
                         shot.kill()
@@ -521,8 +566,7 @@ def money_up():
 
 
 def next_stage():
-    if conf.stage_clear == True:
+    if conf.stage_clear:
         conf.stage_clear = False
         return [conf.stage, True]
-
     return [conf.stage, conf.stage_clear]
