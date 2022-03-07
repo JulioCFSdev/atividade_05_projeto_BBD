@@ -86,7 +86,7 @@ class EldenBlocks:
         while True:
             self.handle_input()
             self.game_logic()
-            if self.power_ups[5]:
+            if self.power_ups[3]:
                 self.multi_ball()
             self.draw()
             pygame.display.flip()
@@ -115,18 +115,9 @@ class EldenBlocks:
     def game_logic(self):
         self.power_ups = power_up_on()
 
-        if self.power_ups[6]:
+        if self.power_ups[4]:
             self.lives += 1
             conf1.extra_life = False
-
-        if self.power_ups[1]:
-            self.ball_speed_x = self.ball_speed_x + (self.ball_speed_x / 3)
-            self.ball_speed_y = self.ball_speed_y + (self.ball_speed_y / 3)
-            conf1.power_fire = False
-        if self.power_ups[2]:
-            self.ball_speed_x = self.ball_speed_x - (self.ball_speed_x / 4)
-            self.ball_speed_y = self.ball_speed_y - (self.ball_speed_y / 4)
-            conf1.power_freeze = False
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
 
@@ -221,7 +212,7 @@ class EldenBlocks:
 
         # draw ball
         ball.draw_ball(self.screen, self.ball)
-        if self.power_ups[5]:
+        if self.power_ups[3]:
             ball.draw_ball(self.screen, self.ball2)
             ball.draw_ball(self.screen, self.ball3)
         # draw paddler
@@ -237,4 +228,3 @@ class EldenBlocks:
 
         for powerup in powerups:
             powerup.move()
-            
