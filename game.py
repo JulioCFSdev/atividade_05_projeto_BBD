@@ -1,7 +1,7 @@
 import pygame
 import wall
 import ball
-from player import all_sprite, player, player_power_up_collision, power_up_on
+from player import all_sprite, player, player_power_up_collision, power_up_on, conf1
 from config import Config
 import brick
 from brick import power_up_sprites, powerups
@@ -86,7 +86,7 @@ class EldenBlocks:
         while True:
             self.handle_input()
             self.game_logic()
-            if conf.power_mult:
+            if self.power_ups[5]:
                 self.multi_ball()
             self.draw()
             pygame.display.flip()
@@ -113,18 +113,23 @@ class EldenBlocks:
 
     # Mechanics and world rules
     def game_logic(self):
+        self.power_ups = power_up_on()
 
-        if conf.power_fire:
+        if self.power_ups[6]:
+            self.lives += 1
+            conf1.extra_life = False
+
+        if self.power_ups[1]:
             self.ball_speed_x = self.ball_speed_x + (self.ball_speed_x / 3)
             self.ball_speed_y = self.ball_speed_y + (self.ball_speed_y / 3)
-            conf.power_fire = False
-        if conf.power_freeze:
+            conf1.power_fire = False
+        if self.power_ups[2]:
             self.ball_speed_x = self.ball_speed_x - (self.ball_speed_x / 4)
             self.ball_speed_y = self.ball_speed_y - (self.ball_speed_y / 4)
-            conf.power_freeze = False
+            conf1.power_freeze = False
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
-        self.power_ups = power_up_on()
+
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,
                                                     self.ball_speed_x, self.ball_speed_y, self.power_ups)
@@ -160,6 +165,7 @@ class EldenBlocks:
             pygame.time.wait(2000)
             self.stage[1] = False
             conf.time_counter = 180
+
     def multi_ball(self):
         # collision ball/paddler
         ball.move_ball(self.ball2, -self.ball_velocity2[0], self.ball_velocity2[1]+1)
@@ -168,7 +174,8 @@ class EldenBlocks:
                                                      self.power_ups)
         # collision ball/blocks
         self.ball_velocity2 = brick.brick_collision(self.ball2, self.ball_velocity2[0],
-                                                    self.ball_velocity2[1], self.stage[0])
+                                                    self.ball_velocity2[1], self.stage[0],
+                                                    self.power_ups, self.power_ups)
         # left wall collision
         self.ball_velocity2[0] *= ball.left_wall_collision(self.ball2)
         # right wall collision
@@ -187,7 +194,8 @@ class EldenBlocks:
                                                      self.power_ups)
         # collision ball/blocks
         self.ball_velocity3 = brick.brick_collision(self.ball3, self.ball_velocity3[0],
-                                                    self.ball_velocity3[1], self.stage[0])
+                                                    self.ball_velocity3[1], self.stage[0],
+                                                    self.power_ups, self.power_ups)
         # left wall collision
         self.ball_velocity3[0] *= ball.left_wall_collision(self.ball3)
         # right wall collision
@@ -213,7 +221,7 @@ class EldenBlocks:
 
         # draw ball
         ball.draw_ball(self.screen, self.ball)
-        if conf.power_mult:
+        if self.power_ups[5]:
             ball.draw_ball(self.screen, self.ball2)
             ball.draw_ball(self.screen, self.ball3)
         # draw paddler
@@ -229,3 +237,4 @@ class EldenBlocks:
 
         for powerup in powerups:
             powerup.move()
+            
