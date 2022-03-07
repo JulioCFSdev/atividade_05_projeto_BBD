@@ -74,8 +74,6 @@ def player_power_up_collision(player1, stage_clear):
     # Reset power-ups
     if stage_clear:
         conf1.power_growth = False
-        conf1.power_freeze = False
-        conf1.power_fire = False
         conf1.power_gyro = False
         conf1.power_mult = False
         conf1.power_ultra = False
@@ -87,10 +85,6 @@ def player_power_up_collision(player1, stage_clear):
             if powerup.power == 0 and conf1.power_growth == False:
                 conf1.power_growth = True
                 conf1.player_width *= 1.2
-            if powerup.power == 1 and conf1.power_freeze == False:
-                conf1.power_freeze = True
-            if powerup.power == 2 and conf1.power_fire == False:
-                conf1.power_fire = True
             if powerup.power == 3 and conf1.power_gyro == False:
                 conf1.power_gyro = True
             if powerup.power == 4 and conf1.power_ultra == False:
@@ -101,5 +95,5 @@ def player_power_up_collision(player1, stage_clear):
                 conf1.extra_life = True
 
 def power_up_on():
-    return [conf1.power_growth, conf1.power_freeze, conf1.power_fire, conf1.power_gyro, conf1.power_ultra,
+    return [conf1.power_growth, conf1.power_gyro, conf1.power_ultra,
             conf1.power_mult, conf1.extra_life]

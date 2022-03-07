@@ -255,8 +255,65 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
         wall_block = conf.block_list_boss
 
     for block in wall_block:
-        if conf.stage == 4 and ball.colliderect(block[0]):
-            # top collision
+        if power_gyro[1] and ball.colliderect(block[0]):
+            conf.power_ultra = False
+            if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+                velocity_1 *= -1
+            # bottom collision
+            elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+                velocity_1 *= -1
+            # right collision
+            elif abs(block[0].x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+                velocity_0 *= -1
+            # left collision
+            elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+                velocity_0 *= -1
+
+            if block[2] == 3:
+                powerup = PowerUp(block[0].x, block[0].y)
+                powerups.append(powerup)
+                power_up_sprites.add(powerup)
+
+
+            if block[2] == 0 or block[2] == 3:
+                conf.money_up = 1
+            elif block[2] == 1:
+                conf.money_up = 2
+            elif block[2] == 2:
+                conf.money_up = 3
+
+            wall_block.remove(block)
+            conf.all_bricks -= 1
+
+
+        elif power_ultra[2] and ball.colliderect(block[0]):
+            conf.power_gyro = False
+            # checking the collision side
+            if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
+                velocity_1 = velocity_1
+            # bottom collision
+            elif abs((block[0].y + conf.block_height) - ball.y) < 5 and velocity_1 < 0:
+                velocity_1 = velocity_1
+            # right collision
+            elif abs(block[0].x - (ball.x + conf.ball_width)) < 5 and velocity_0 > 0:
+                velocity_1 = velocity_1
+            # left collision
+            elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
+                velocity_1 = velocity_1
+
+            if block[2] == 0 or block[2] == 3:
+                conf.money_up = 1
+            elif block[2] == 1:
+                conf.money_up = 2
+            elif block[2] == 2:
+                conf.money_up = 3
+
+            wall_block.remove(block)
+            conf.all_bricks -= 1
+
+
+        elif conf.stage == 4 and ball.colliderect(block[0]):
+            # checking the collision side
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                     velocity_1 *= -1
             # bottom collision
