@@ -17,7 +17,7 @@ class Config:
         self.font2 = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
         self.font = pygame.font.Font("wall_dependencies/ENDOR___.ttf", 34)
         # Stage values
-        self.stage = 2
+        self.stage = 1
         self.stage_clear = False
         # Score value
         self.money_up = False
