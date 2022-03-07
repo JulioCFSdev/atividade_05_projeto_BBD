@@ -71,19 +71,15 @@ def player_power_up_collision(player1):
             if powerup.power == 0 and conf1.power_growth == False:
                 conf1.power_growth = True
                 conf1.player_width *= 1.2
-            if powerup.power == 1 and conf1.power_freeze == False:
-                conf1.power_freeze = True
-            if powerup.power == 2 and conf1.power_fire == False:
-                conf1.power_fire = True
-            if powerup.power == 3 and conf1.power_gyro == False:
+            if powerup.power == 1 and conf1.power_gyro == False:
                 conf1.power_gyro = True
-            if powerup.power == 4 and conf1.power_ultra == False:
+            if powerup.power == 2 and conf1.power_ultra == False:
                 conf1.power_ultra = True
-            if powerup.power == 5:
+            if powerup.power == 3:
                 conf1.power_mult = True
-            if powerup.power == 6:
+            if powerup.power == 4:
                 conf1.extra_life = True
 
 def power_up_on():
-    return [conf1.power_growth, conf1.power_freeze, conf1.power_fire, conf1.power_gyro, conf1.power_ultra,
+    return [conf1.power_growth,  conf1.power_gyro, conf1.power_ultra,
             conf1.power_mult, conf1.extra_life]
