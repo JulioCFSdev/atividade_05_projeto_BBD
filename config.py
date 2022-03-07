@@ -1,4 +1,6 @@
 import pygame
+
+
 class Config:
 
     def __init__(self):
@@ -27,6 +29,7 @@ class Config:
         self.pos_time_icon = 4
         self.pos_time_value = 5.5
         # Power up variables
+        self.power_growth = False
         self.power_freeze = False
         self.power_fire = False
         self.power_growth = False
@@ -97,4 +100,5 @@ class Config:
 
         self.powerup = 1
 
-        
+        self.size = 5
+
