@@ -15,9 +15,9 @@ class Config:
         self.bg_menu = pygame.image.load("wall_dependencies/bg.png")
         # Fonts and Texts
         self.font2 = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-        self.font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
+        self.font = pygame.font.Font("wall_dependencies/ENDOR___.ttf", 34)
         # Stage values
-        self.stage = 4
+        self.stage = 2
         self.stage_clear = False
         # Score value
         self.money_up = False
@@ -63,8 +63,10 @@ class Config:
         self.col_bricks_1 = 7
         self.row_bricks_11 = 6
         self.col_bricks_11 = 7
-        self.row_bricks_2 = 1
-        self.col_bricks_2 = 1
+        self.row_bricks_2 = 6
+        self.col_bricks_2 = 10
+        self.row_bricks_22 = 6
+        self.col_bricks_22 = 10
         self.row_bricks_3 = 1
         self.col_bricks_3 = 1
         self.row_bricks_boss = 10

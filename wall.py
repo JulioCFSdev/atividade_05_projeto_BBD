@@ -9,7 +9,7 @@ def hud_score(display, size, pos_money_icon_var, score_value, pos_score_value_va
     text = conf.font2.render("💰", True, conf.white)
     display.blit(text, (size - (size / pos_money_icon_var), 1))  # 1.05
     text2 = conf.font.render(":  " + str(score_value), True, conf.white)
-    display.blit(text2, (size - (size / pos_score_value_var), 1))  # 1.15
+    display.blit(text2, (size - (size / pos_score_value_var), 2))  # 1.15
     
     # MAIN SETTING = hud_score(screen, width, 1.05, 1.15)
 
@@ -35,7 +35,7 @@ def hud_time(display, size, pos_time_icon_var, time_value, pos_time_value_var):
 def screen_lines(display, color, line_size):
     # Color must be in the rgb format(x, x, x) or with an equivalent constant
     # horizontal lines
-    pygame.draw.line(display, color, [0, 50], [conf.screen_width, 50], line_size)
+    pygame.draw.line(display, color, [0, 70], [conf.screen_width, 70], line_size)
 
     # vertical lines
     pygame.draw.line(display, color, [0, 0], [0, conf.screen_height], line_size)
