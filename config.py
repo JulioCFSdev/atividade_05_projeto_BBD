@@ -32,6 +32,7 @@ class Config:
         # Power up variables
         self.power_shot = False
         self.power_growth = False
+        self.power_small = False
         self.power_gyro = False
         self.power_mult = False
         self.power_ultra = False
