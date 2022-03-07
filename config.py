@@ -32,7 +32,7 @@ class Config:
         self.power_growth = False
         self.power_freeze = False
         self.power_fire = False
-        self.power_mult = False
+        self.power_growth = False
         self.power_gyro = False
         self.power_ultra = False
         # Line size on sides and top
@@ -77,7 +77,7 @@ class Config:
         # Player position
         self.actual = 0
         # Player dimension values
-        self.player_width = 110
+        self.player_width = 180
         self.player_heigth = 20
         # Player initial coordinates values
         self.player_x = 390
@@ -101,4 +101,3 @@ class Config:
         self.powerup = 1
 
         self.size = 5
-
