@@ -1,6 +1,10 @@
+from cmath import rect
 import pygame
 import config
+from laser import Laser
+import player
 from powerup import PowerUp
+
 
 # define the wall blocks function
 conf = config.Config()
@@ -162,7 +166,7 @@ def create_stage_3():
 
 
 # Create the wall blocks
-def create_boss_fight():
+def create_stage_4():
     for row in range(conf.row_bricks_boss):
         for col in range(conf.col_bricks_boss):
             block_x = col * conf.block_width + 20
@@ -220,13 +224,13 @@ def draw_bricks(screen):
                 color = conf.blue
             elif block[2] == 0:
                 color = conf.yellow
-            elif block[2] == 4:
-                color = conf.orange
+                if conf.stage == 4:
+                    color = conf.orange
         elif block[3] == 2:
             color = conf.green
         elif block[3] == 3:
             color = conf.red
-        elif block[3] > 3:
+        if conf.stage == 4 and block[3] > 3:
             color = conf.gray
 
         pygame.draw.rect(screen, color, block[0])
@@ -234,7 +238,7 @@ def draw_bricks(screen):
 
 
 # brick colission function
-def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra):
+def brick_collision(ball, laser, velocity_0, velocity_1, stage, power_gyro, power_ultra):
     n = 0
     conf.money_up = 0
 
@@ -408,6 +412,22 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
 
                     wall_block.remove(block)
                     conf.all_bricks -= 1
+            for shot in laser:
+                if block[0].x - conf.block_width < shot.rect.x < block[0].x + conf.block_width and \
+                        block[0].y < shot.rect.y + conf.block_height < block[0].y + conf.block_height:
+                    if block[3] != 1:
+                        wall_block[n][3] -= 1
+
+                    else:
+                        if block[2] == 0 or block[2] == 3:
+                            conf.money_up = 1
+                        elif block[2] == 1:
+                            conf.money_up = 2
+                        elif block[2] == 2:
+                            conf.money_up = 3
+
+                        wall_block.remove(block)
+                        conf.all_bricks -= 1
 
         n += 1
     return [velocity_0, velocity_1]

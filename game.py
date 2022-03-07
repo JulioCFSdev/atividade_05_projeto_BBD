@@ -5,7 +5,6 @@ from player import all_sprite, player, player_power_up_collision, power_up_on, c
 from config import Config
 import brick
 from brick import power_up_sprites, powerups
-from laser import Laser 
 import sys
 
 # Shrinking class call characters
@@ -42,7 +41,7 @@ class EldenBlocks:
         self.brick_1 = brick.create_stage_1()
         self.brick_2 = brick.create_stage_2()
         self.brick_3 = brick.create_stage_3()
-        self.brick_boss = brick.create_boss_fight()
+        self.brick_boss = brick.create_stage_4()
 
     # Main Menu:
     def Menu(self):
@@ -127,7 +126,7 @@ class EldenBlocks:
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,
                                                     self.ball_speed_x, self.ball_speed_y, self.power_ups)
         # collision ball/blocks
-        self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0],
+        self.ball_velocity = brick.brick_collision(self.ball, player.lasers, self.ball_velocity[0],
                                                    self.ball_velocity[1], self.stage[0], self.power_ups, self.power_ups)
         # left wall collision
         self.ball_velocity[0] *= ball.left_wall_collision(self.ball)
@@ -171,7 +170,7 @@ class EldenBlocks:
                                                      self.ball_speed_x2, self.ball_speed_y2,
                                                      self.power_ups)
         # collision ball/blocks
-        self.ball_velocity2 = brick.brick_collision(self.ball2, self.ball_velocity2[0],
+        self.ball_velocity2 = brick.brick_collision(self.ball2, player.lasers, self.ball_velocity2[0],
                                                     self.ball_velocity2[1], self.stage[0],
                                                     self.power_ups, self.power_ups)
         # left wall collision
