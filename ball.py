@@ -74,23 +74,23 @@ def upper_wall_collision(ball):
 def paddler_collision(ball, velocity, paddler, speedx, speedy, power_growth):
     if power_growth[0]:
         # velocity A left
-        if paddler.rect.x < ball.x < paddler.rect.x + 40*1.5 and \
+        if paddler.rect.x < ball.x < paddler.rect.x + 40*1.2 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:
             return [speedx - 2, -speedy]
         # velocity A right
-        elif paddler.rect.x + 130*1.5 < ball.x < paddler.rect.x + 160*1.5 and \
+        elif paddler.rect.x + 130*1.2 < ball.x < paddler.rect.x + 160*1.2 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:
             return [speedx + 2, -speedy]
         # velocity B left
-        elif paddler.rect.x + 40*1.5 < ball.x < paddler.rect.x + 70*1.5 and \
+        elif paddler.rect.x + 40*1.2 < ball.x < paddler.rect.x + 70*1.2 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:
             return [-speedx, -speedy]
         # velocity B right
-        elif paddler.rect.x + 90*1.5 < ball.x < paddler.rect.x + 130*1.5 and \
+        elif paddler.rect.x + 90*1.2 < ball.x < paddler.rect.x + 130*1.5 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:
             return [speedx, -speedy]
         # velocity C
-        elif paddler.rect.x + 70*1.5 < ball.x < paddler.rect.x + 90*1.5 and \
+        elif paddler.rect.x + 70*1.2 < ball.x < paddler.rect.x + 90*1.2 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:
             return [0, -speedy]
         # no collision
