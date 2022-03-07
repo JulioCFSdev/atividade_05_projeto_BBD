@@ -131,6 +131,7 @@ class EldenBlocks:
                                                        self.ball_speed_x, self.ball_speed_y)
         # powerups collision
         player_power_up_collision(player)
+
         # Money up
         money_condition = brick.money_up()
         if money_condition == 1:
