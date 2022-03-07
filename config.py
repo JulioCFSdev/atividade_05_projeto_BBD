@@ -15,7 +15,7 @@ class Config:
         self.bg_menu = pygame.image.load("wall_dependencies/bg.png")
         # Fonts and Texts
         self.font2 = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
-        self.font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
+        self.font = pygame.font.Font("wall_dependencies/ENDOR___.ttf", 34)
         # Stage values
         self.stage = 2
         self.stage_clear = False
