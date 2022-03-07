@@ -21,17 +21,21 @@ def create_stage_1():
             # Determining block types
             if row == 6:
                 block_type = 0
+            elif row == 8:
+                block_type = 1
+            elif row == 7:
+                block_type = 3
             elif row == 6:
                 block_type = 0
             elif row == 5:
                 block_type = 0
             elif row == 4:
                 block_type = 0
-            elif row == 3:
-                block_type = 3
-            elif row == 2:
-                block_type = 1
-            elif row == 1:
+            elif row == 3:	
+                block_type = 3	
+            elif row == 2:	
+                block_type = 1	
+            elif row == 1:	
                 block_type = 0
             else:
                 block_type = 2
