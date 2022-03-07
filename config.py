@@ -67,8 +67,10 @@ class Config:
         self.col_bricks_2 = 10
         self.row_bricks_22 = 6
         self.col_bricks_22 = 10
-        self.row_bricks_3 = 1
-        self.col_bricks_3 = 1
+        self.row_bricks_3 = 9
+        self.col_bricks_3 = 4
+        self.row_bricks_33 = 3
+        self.col_bricks_33 = 19
         self.row_bricks_boss = 10
         self.col_bricks_boss = 19
         self.all_bricks = 50
