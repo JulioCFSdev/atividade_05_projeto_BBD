@@ -5,16 +5,13 @@ from config import Config
 
 conf = Config()
 
-shoots_sprites = pygame.sprite.Group()
-shoots_list = []
-
 
 class PowerUp(pygame.sprite.Sprite):
     def __init__(self, coordx, coordy):
         pygame.sprite.Sprite.__init__(self)
         self.sprites = []
         self.sprites.append(pygame.image.load('Powerup_big/sprite_big1.png'))
-        self.sprites.append(pygame.image.load('Powerup_sprites/sprite_magne.png'))
+        self.sprites.append(pygame.image.load('Powerup_sprites/sprite_ultraball.png'))
         self.sprites.append(pygame.image.load('Powerup_sprites/sprite_ultraball.png'))
         self.sprites.append(pygame.image.load('Powerup_sprites/sprite_multiballs.png'))
         self.sprites.append(pygame.image.load('Powerup_life/sprite_life1.png'))
