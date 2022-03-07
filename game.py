@@ -144,8 +144,6 @@ class EldenBlocks:
         # death point - (collision ball/wall down)
         self.ball_velocity = ball.lower_wall_collision(self.ball, self.ball_velocity,
                                                        self.ball_speed_x, self.ball_speed_y)
-        # powerups collision
-        player_power_up_collision(player)
 
         # Money up
         money_condition = brick.money_up()
@@ -157,8 +155,11 @@ class EldenBlocks:
         live_condition = ball.live_lost()
         if live_condition:
             self.lives -= 1
-            
+
         self.stage = brick.next_stage()
+
+        # powerups collision
+        player_power_up_collision(player, self.stage[1])
 
         # Stage win screen
         if self.stage[1]:

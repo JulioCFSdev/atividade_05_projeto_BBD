@@ -64,7 +64,17 @@ player = Player()
 all_sprite.add(player)
 
 
-def player_power_up_collision(player1):
+def player_power_up_collision(player1, stage_clear):
+    # Reset power-ups
+    if stage_clear:
+        conf1.power_growth = False
+        conf1.power_freeze = False
+        conf1.power_fire = False
+        conf1.power_gyro = False
+        conf1.power_mult = False
+        conf1.power_ultra = False
+        conf1.extra_life = False
+
     for powerup in powerups:
         if pygame.sprite.collide_mask(powerup, player1):
             power_up_sprites.remove(powerup)
