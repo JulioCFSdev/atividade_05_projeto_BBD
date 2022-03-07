@@ -1,7 +1,7 @@
 import pygame
 import wall
 import ball
-from player import all_sprite, player, player_power_up_collision, power_up_on
+from player import all_sprite, player, player_power_up_collision, power_up_on, conf1
 from config import Config
 import brick
 from brick import power_up_sprites, powerups
@@ -19,13 +19,21 @@ class EldenBlocks:
     # Initial variables and set screen
     def __init__(self):
         self.score = 0
-        self.lives = 3
+        self.lives = 15
         self.stage = [1, False]
         self.clock = pygame.time.Clock()
         self.ball = ball.create_ball()
+        self.ball2 = ball.create_ball()
+        self.ball3 = ball.create_ball()
         self.ball_speed_x = 3
         self.ball_speed_y = 3
+        self.ball_speed_x2 = 3
+        self.ball_speed_y2 = 3
+        self.ball_speed_x3 = 3
+        self.ball_speed_y3 = 3
         self.ball_velocity = ball.ball_velocity(self.ball_speed_x, self.ball_speed_y)
+        self.ball_velocity2 = ball.ball_velocity(self.ball_speed_x2, self.ball_speed_y2)
+        self.ball_velocity3 = ball.ball_velocity(self.ball_speed_x3, self.ball_speed_y3)
         pygame.init()
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         pygame.display.set_caption(conf.bg_name)
@@ -78,6 +86,8 @@ class EldenBlocks:
         while True:
             self.handle_input()
             self.game_logic()
+            if self.power_ups[5]:
+                self.multi_ball()
             self.draw()
             pygame.display.flip()
             pygame.display.update()
@@ -103,19 +113,22 @@ class EldenBlocks:
 
     # Mechanics and world rules
     def game_logic(self):
+        self.power_ups = power_up_on()
 
-        if conf.power_fire:
+        if self.power_ups[6]:
+            self.lives += 1
+            conf1.extra_life = False
+
+        if self.power_ups[1]:
             self.ball_speed_x = self.ball_speed_x + (self.ball_speed_x / 3)
             self.ball_speed_y = self.ball_speed_y + (self.ball_speed_y / 3)
-            conf.power_fire = False
-        if conf.power_freeze:
+            conf1.power_fire = False
+        if self.power_ups[2]:
             self.ball_speed_x = self.ball_speed_x - (self.ball_speed_x / 4)
             self.ball_speed_y = self.ball_speed_y - (self.ball_speed_y / 4)
-            conf.power_freeze = False
+            conf1.power_freeze = False
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
-        # Getting the updated status of power ups
-        self.power_ups = power_up_on()
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,
                                                     self.ball_speed_x, self.ball_speed_y, self.power_ups)
@@ -141,6 +154,10 @@ class EldenBlocks:
         elif money_condition > 1:
             self.score += 10
 
+        live_condition = ball.live_lost()
+        if live_condition:
+            self.lives -= 1
+            
         self.stage = brick.next_stage()
 
         # Stage win screen
@@ -152,6 +169,45 @@ class EldenBlocks:
             self.stage[1] = False
             conf.time_counter = 180
 
+    def multi_ball(self):
+        # collision ball/paddler
+        ball.move_ball(self.ball2, -self.ball_velocity2[0], self.ball_velocity2[1]+1)
+        self.ball_velocity2 = ball.paddler_collision(self.ball2, self.ball_velocity2, paddler,
+                                                     self.ball_speed_x2, self.ball_speed_y2,
+                                                     self.power_ups)
+        # collision ball/blocks
+        self.ball_velocity2 = brick.brick_collision(self.ball2, self.ball_velocity2[0],
+                                                    self.ball_velocity2[1], self.stage[0],
+                                                    self.power_ups, self.power_ups)
+        # left wall collision
+        self.ball_velocity2[0] *= ball.left_wall_collision(self.ball2)
+        # right wall collision
+        self.ball_velocity2[0] *= ball.right_wall_collision(self.ball2)
+        # upper wall collision
+        self.ball_velocity2[1] *= ball.upper_wall_collision(self.ball2)
+        # death point - (collision ball/wall down)
+        self.ball_velocity2 = ball.lower_wall_collision_mult(self.ball2, self.ball_velocity2,
+                                                        self.ball_speed_x2, self.ball_speed_y2)
+
+        # Ball 3
+
+        ball.move_ball(self.ball3, -self.ball_velocity3[0], self.ball_velocity3[1]-1)
+        self.ball_velocity3 = ball.paddler_collision(self.ball3, self.ball_velocity3, paddler,
+                                                     self.ball_speed_x3, self.ball_speed_y3,
+                                                     self.power_ups)
+        # collision ball/blocks
+        self.ball_velocity3 = brick.brick_collision(self.ball3, self.ball_velocity3[0],
+                                                    self.ball_velocity3[1], self.stage[0],
+                                                    self.power_ups, self.power_ups)
+        # left wall collision
+        self.ball_velocity3[0] *= ball.left_wall_collision(self.ball3)
+        # right wall collision
+        self.ball_velocity3[0] *= ball.right_wall_collision(self.ball3)
+        # upper wall collision
+        self.ball_velocity3[1] *= ball.upper_wall_collision(self.ball3)
+        # death point - (collision ball/wall down)
+        self.ball_velocity3 = ball.lower_wall_collision_mult(self.ball3, self.ball_velocity3,
+                                                        self.ball_speed_x3, self.ball_speed_y3)
 
     # Drawing the screen and its factors
     def draw(self):
@@ -168,6 +224,9 @@ class EldenBlocks:
 
         # draw ball
         ball.draw_ball(self.screen, self.ball)
+        if self.power_ups[5]:
+            ball.draw_ball(self.screen, self.ball2)
+            ball.draw_ball(self.screen, self.ball3)
         # draw paddler
         all_sprite.draw(self.screen)
         all_sprite.update()
@@ -181,3 +240,4 @@ class EldenBlocks:
 
         for powerup in powerups:
             powerup.move()
+            

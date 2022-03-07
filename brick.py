@@ -13,24 +13,26 @@ powerups = []
 def create_stage_1():
     for row in range(conf.row_bricks_1):
         for col in range(conf.col_bricks_1):
-            block_x = col * conf.block_width + 20
-            block_y = row * conf.block_height + 100
+            block_x = col * conf.block_width + 10
+            block_y = row * conf.block_height + 180
 
             score = 5
 
             # Determining block types
-            if row == 9:
+            if row == 6:
                 block_type = 0
-            elif row == 8:
-                block_type = 1
-            elif row == 7:
-                block_type = 3
             elif row == 6:
                 block_type = 0
             elif row == 5:
-                block_type = 1
+                block_type = 0
             elif row == 4:
+                block_type = 0
+            elif row == 3:
                 block_type = 3
+            elif row == 2:
+                block_type = 1
+            elif row == 1:
+                block_type = 0
             else:
                 block_type = 2
 
@@ -46,6 +48,42 @@ def create_stage_1():
             conf.block_individual_1 = [block, score, block_type, block_life]
             conf.block_list_1.append(conf.block_individual_1)
 
+    for row in range(conf.row_bricks_11):
+        for col in range(conf.col_bricks_11):
+            block_x = col * conf.block_width + 645
+            block_y = row * conf.block_height + 180
+
+            score = 5
+
+            # Determining block types
+            if row == 6:
+                block_type = 0
+            elif row == 6:
+                block_type = 0
+            elif row == 5:
+                block_type = 0
+            elif row == 4:
+                block_type = 0
+            elif row == 3:
+                block_type = 3
+            elif row == 2:
+                block_type = 1
+            elif row == 1:
+                block_type = 0
+            else:
+                block_type = 2
+
+            # Determining the life of blocks
+            if block_type == 0 or block_type == 3:
+                block_life = 1
+            elif block_type == 1:
+                block_life = 2
+            else:
+                block_life = 3
+
+            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            conf.block_individual_1 = [block, score, block_type, block_life]
+            conf.block_list_1.append(conf.block_individual_1)
 
 # Create the wall blocks stage 2
 def create_stage_2():
@@ -182,7 +220,7 @@ def draw_bricks(screen):
                 color = conf.blue
             elif block[2] == 0:
                 color = conf.yellow
-            else:
+            elif block[2] == 4:
                 color = conf.orange
         elif block[3] == 2:
             color = conf.green
@@ -224,6 +262,7 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
                     wall_block.remove(wall_block[x])
 
         if power_gyro[2] and ball.colliderect(block[0]):
+            conf.power_ultra = False
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 *= -1
             # bottom collision
@@ -248,7 +287,7 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
 
 
         elif power_ultra[3] and ball.colliderect(block[0]):
-
+            conf.power_gyro = False
             # checking the collision side
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 = velocity_1
@@ -301,7 +340,7 @@ def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra
                 elif block[2] == 1:
                     conf.money_up = 2
                 elif block[2] == 2:
-                    conf.money_up == 3
+                    conf.money_up = 3
 
                 wall_block.remove(block)
                 conf.all_bricks -= 1

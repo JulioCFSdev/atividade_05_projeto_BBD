@@ -9,7 +9,7 @@ class Config:
         self.screen_height = 800
         self.size = (self.screen_width, self.screen_height)
         # Background
-        self.bg_name = "Blocks Age"
+        self.bg_name = "Elden Blocks"
         self.coord_bg = [0, 0]
         self.bg_main_1 = pygame.image.load("wall_dependencies/bg1.png")
         self.bg_menu = pygame.image.load("wall_dependencies/bg.png")
@@ -17,10 +17,11 @@ class Config:
         self.font2 = pygame.font.Font("wall_dependencies/EmojiOneColor.otf", 34)
         self.font = pygame.font.Font("wall_dependencies/DSEG14Classic-Bold.ttf", 34)
         # Stage values
-        self.stage = 4
+        self.stage = 1
         self.stage_clear = False
         # Score value
         self.money_up = False
+        self.live_loss = False
         # Icon and character position constants
         self.pos_money = 1.05
         self.pos_score = 1.15
@@ -32,9 +33,10 @@ class Config:
         self.power_growth = False
         self.power_freeze = False
         self.power_fire = False
-        self.power_growth = False
         self.power_gyro = False
+        self.power_mult = False
         self.power_ultra = False
+        self.extra_life = False
         # Line size on sides and top
         self.line_size = 12
         # Time related values
@@ -57,8 +59,10 @@ class Config:
         self.ball_x_init = 500
         self.ball_y_init = 400
         # Block values (Coluns and rows, dimensions, list)
-        self.row_bricks_1 = 10
-        self.col_bricks_1 = 19
+        self.row_bricks_1 = 6
+        self.col_bricks_1 = 7
+        self.row_bricks_11 = 6
+        self.col_bricks_11 = 7
         self.row_bricks_2 = 1
         self.col_bricks_2 = 1
         self.row_bricks_3 = 1
@@ -103,3 +107,4 @@ class Config:
         self.powerup = 1
 
         self.size = 5
+

@@ -43,6 +43,7 @@ def lower_wall_collision(ball, velocity, speedx, speedy):
     if ball.y + conf.tresh_lower_wall > conf.screen_height:
         ball.x = conf.ball_x_init
         ball.y = conf.ball_y_init
+        conf.live_loss = True
 
         if velocity[0] > 0:
             return [-speedx, speedy]
@@ -120,3 +121,12 @@ def paddler_collision(ball, velocity, paddler, speedx, speedy, power_growth):
         # no collision
         else:
             return velocity
+
+
+def live_lost():
+    if conf.live_loss:
+        conf.live_loss = False
+        return True
+    else:
+        return conf.live_loss
+    
