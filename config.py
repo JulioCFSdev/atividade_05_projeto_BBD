@@ -93,20 +93,6 @@ class Config:
         self.tresh_upper_wall = 58
         # Frames por second value
         self.fps = 120
-        # Paddler values 
-        self.x = 340
-        self.y = 570
-        self.sprites_1 = []
-        self.sprites_2 = []
-        self.sprites_3 = []
-        self.sprites_1.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
-        self.sprites_2.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
-        self.sprites_3.append(pygame.image.load('Player_sprite/l0_sprite_1.png'))
-        self.sprites_2.append(pygame.image.load('Player_sprite/l0_sprite_2.png'))
-        self.sprites_3.append(pygame.image.load('Player_sprite/l0_sprite_3.png'))
-        self.actual = 0
-        self.speed = 10
-        self.direction = 0
 
         self.powerup = 1
 
