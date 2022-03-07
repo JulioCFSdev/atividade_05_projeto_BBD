@@ -174,24 +174,59 @@ def create_stage_2():
 def create_stage_3():
     for row in range(conf.row_bricks_3):
         for col in range(conf.col_bricks_3):
-            block_x = col * conf.block_width + 20
-            block_y = row * conf.block_height + 100
+            block_x = col * conf.block_width + 400
+            block_y = row * conf.block_height + 70
 
             score = 5
 
             # Determining block types
             if row == 9:
-                block_type = 0
-            elif row == 8:
                 block_type = 1
+            elif row == 8:
+                block_type = 2
             elif row == 7:
                 block_type = 3
             elif row == 6:
                 block_type = 0
             elif row == 5:
-                block_type = 1
+                block_type = 0
             elif row == 4:
-                block_type = 3
+                block_type = 2
+            elif row == 3:
+                block_type = 1
+            elif row == 2:
+                block_type = 1
+            elif row == 1:
+                block_type = 0
+            else:
+                block_type = 2
+
+            # Determining the life of blocks
+            if block_type == 0 or block_type == 3:
+                block_life = 1
+            elif block_type == 1:
+                block_life = 2
+            else:
+                block_life = 3
+
+            block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
+            conf.block_individual_3 = [block, score, block_type, block_life]
+            conf.block_list_3.append(conf.block_individual_3)
+
+    for row in range(conf.row_bricks_33):
+        for col in range(conf.col_bricks_33):
+            block_x = col * conf.block_width + 30
+            block_y = row * conf.block_height + 295
+
+            score = 5
+
+            # Determining block types
+            if row == 3:
+                block_type = 1
+            elif row == 2:
+                block_type = 0
+            elif row == 1:
+                block_type = 1
             else:
                 block_type = 2
 
