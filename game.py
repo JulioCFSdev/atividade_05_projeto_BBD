@@ -114,6 +114,7 @@ class EldenBlocks:
             conf.power_freeze = False
 
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
+        # Getting the updated status of power ups
         self.power_ups = power_up_on()
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,

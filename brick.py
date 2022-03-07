@@ -127,33 +127,13 @@ def create_boss_fight():
     for row in range(conf.row_bricks_boss):
         for col in range(conf.col_bricks_boss):
             block_x = col * conf.block_width + 20
-            block_y = row * conf.block_height + 100
+            block_y = row * conf.block_height + 115
 
             score = 5
 
             # Determining block types
-            if row == 9:
-                block_type = 0
-            elif row == 8:
-                block_type = 1
-            elif row == 7:
-                block_type = 3
-            elif row == 6:
-                block_type = 0
-            elif row == 5:
-                block_type = 1
-            elif row == 4:
-                block_type == 3
-            else:
-                block_type = 2
-
-            # Determining the life of blocks
-            if block_type == 0 or block_type == 3:
-                block_life = 1
-            elif block_type == 1:
-                block_life = 2
-            else:
-                block_life = 3
+            block_type = 0
+            block_life = 1
 
             block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
             conf.block_individual_boss = [block, score, block_type, block_life]
