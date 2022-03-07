@@ -5,6 +5,7 @@ from player import all_sprite, player, player_power_up_collision, power_up_on, c
 from config import Config
 import brick
 from brick import power_up_sprites, powerups
+from laser import Laser 
 import sys
 
 # Shrinking class call characters
@@ -73,6 +74,7 @@ class EldenBlocks:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         sys.exit()
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         click = True
@@ -128,7 +130,8 @@ class EldenBlocks:
             self.ball_speed_y = self.ball_speed_y - (self.ball_speed_y / 4)
             conf1.power_freeze = False
 
-        ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
+        # movement ball
+        ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,
                                                     self.ball_speed_x, self.ball_speed_y, self.power_ups)
@@ -238,6 +241,9 @@ class EldenBlocks:
 
         # power ups
         power_up_sprites.draw(self.screen)
+
+        player.lasers.draw(self.screen)
+        player.lasers.update()
 
         for powerup in powerups:
             powerup.move()

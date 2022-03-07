@@ -2,6 +2,8 @@ import config
 import pygame
 from pygame.locals import *
 from brick import powerups, power_up_sprites
+import game
+from laser import Laser
 
 conf1 = config.Config()
 
@@ -24,6 +26,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (conf1.player_width, 32 * 5))
         self.speed = 10
         self.direction = 0
+
+        self.lasers = pygame.sprite.Group()
 
         self.rect = self.image.get_rect()
         self.rect.topleft = [self.x, self.y]
@@ -57,7 +61,9 @@ class Player(pygame.sprite.Sprite):
                 self.actual = 0
             self.image = self.sprites_2[int(self.actual)]
             self.image = pygame.transform.scale(self.image, (conf1.player_width, 32 * 5))
-
+        
+        elif key[pygame.K_SPACE]:
+            self.lasers.add(Laser(player.rect.center))
 
 all_sprite = pygame.sprite.Group()
 player = Player()

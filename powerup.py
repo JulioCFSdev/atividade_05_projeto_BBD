@@ -28,3 +28,4 @@ class PowerUp(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.y += self.speed_y
+        
