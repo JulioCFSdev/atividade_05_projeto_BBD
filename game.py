@@ -23,9 +23,17 @@ class EldenBlocks:
         self.stage = [1, False]
         self.clock = pygame.time.Clock()
         self.ball = ball.create_ball()
+        self.ball2 = ball.create_ball()
+        self.ball3 = ball.create_ball()
         self.ball_speed_x = 3
         self.ball_speed_y = 3
+        self.ball_speed_x2 = 3
+        self.ball_speed_y2 = 3
+        self.ball_speed_x3 = 3
+        self.ball_speed_y3 = 3
         self.ball_velocity = ball.ball_velocity(self.ball_speed_x, self.ball_speed_y)
+        self.ball_velocity2 = ball.ball_velocity(self.ball_speed_x2, self.ball_speed_y2)
+        self.ball_velocity3 = ball.ball_velocity(self.ball_speed_x3, self.ball_speed_y3)
         pygame.init()
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         pygame.display.set_caption(conf.bg_name)
@@ -37,8 +45,8 @@ class EldenBlocks:
 
     # Main Menu:
     def Menu(self):
-        pygame.mixer.music.load("wall_dependencies/main_loop_song.mp3")
-        pygame.mixer.music.play()
+        ##pygame.mixer.music.load("wall_dependencies/main_loop_song.mp3")
+        # pygame.mixer.music.play()
         menu_txt = conf.font.render("Menu Principal", 1, conf.white)
         play_txt = conf.font.render("Play", 1, conf.white)
         quit_txt = conf.font.render("Quit", 1, conf.white)
@@ -73,11 +81,13 @@ class EldenBlocks:
 
     # Game loop
     def main_loop(self):
-        pygame.mixer.music.load("wall_dependencies/menu_song.mp3")
-        pygame.mixer.music.play()
+        # pygame.mixer.music.load("wall_dependencies/menu_song.mp3")
+        # pygame.mixer.music.play()
         while True:
             self.handle_input()
             self.game_logic()
+            if conf.power_mult:
+                self.multi_ball()
             self.draw()
             pygame.display.flip()
             pygame.display.update()
@@ -92,7 +102,8 @@ class EldenBlocks:
                     3) if conf.time_counter > 0 else "X"
             if conf.time_text == "X" or self.lives == 0:
                 game_over_text = conf.font.render("GAME OVER", True, (255, 255, 255))
-                self.screen.blit(game_over_text, (conf.screen_width / 2 - 100, conf.screen_height / 2))
+                self.screen.blit(game_over_text,
+                                 (conf.screen_width / 2 - 100, conf.screen_height / 2))
                 pygame.display.flip()
                 pygame.time.wait(2000)
                 pygame.quit()
@@ -103,7 +114,6 @@ class EldenBlocks:
 
     # Mechanics and world rules
     def game_logic(self):
-
         if conf.power_fire:
             self.ball_speed_x = self.ball_speed_x + (self.ball_speed_x / 3)
             self.ball_speed_y = self.ball_speed_y + (self.ball_speed_y / 3)
@@ -112,45 +122,93 @@ class EldenBlocks:
             self.ball_speed_x = self.ball_speed_x - (self.ball_speed_x / 4)
             self.ball_speed_y = self.ball_speed_y - (self.ball_speed_y / 4)
             conf.power_freeze = False
-
+            # powerups collision
+        player_power_up_collision(player)
         ball.move_ball(self.ball, self.ball_velocity[0], self.ball_velocity[1])  # movement ball
         self.power_ups = power_up_on()
         # collision ball/paddler
         self.ball_velocity = ball.paddler_collision(self.ball, self.ball_velocity, paddler,
-                                                    self.ball_speed_x, self.ball_speed_y, self.power_ups)
+                                                    self.ball_speed_x, self.ball_speed_y,
+                                                    self.power_ups)
+
         # collision ball/blocks
         self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0],
                                                    self.ball_velocity[1], self.stage[0])
+
+
         # left wall collision
         self.ball_velocity[0] *= ball.left_wall_collision(self.ball)
+
         # right wall collision
         self.ball_velocity[0] *= ball.right_wall_collision(self.ball)
+
         # upper wall collision
         self.ball_velocity[1] *= ball.upper_wall_collision(self.ball)
+
         # death point - (collision ball/wall down)
         self.ball_velocity = ball.lower_wall_collision(self.ball, self.ball_velocity,
                                                        self.ball_speed_x, self.ball_speed_y)
+
         # powerups collision
         player_power_up_collision(player)
-
         # Money up
         money_condition = brick.money_up()
         if money_condition == 1:
             self.score += 5
         elif money_condition > 1:
             self.score += 10
+        if self.score > 0:
+            conf.power_mult = True
 
         self.stage = brick.next_stage()
 
         # Stage win screen
         if self.stage[1]:
             stage_clear_text = conf.font.render("STAGE CLEAR", True, conf.white)
-            self.screen.blit(stage_clear_text, (conf.screen_width / 2 - 100, conf.screen_height / 2))
+            self.screen.blit(stage_clear_text,
+                             (conf.screen_width / 2 - 100, conf.screen_height / 2))
             pygame.display.flip()
             pygame.time.wait(2000)
             self.stage[1] = False
             conf.time_counter = 180
 
+    def multi_ball(self):
+        # collision ball/paddler
+        ball.move_ball(self.ball2, -self.ball_velocity2[0], self.ball_velocity2[1]+1)
+        self.ball_velocity2 = ball.paddler_collision(self.ball2, self.ball_velocity2, paddler,
+                                                     self.ball_speed_x2, self.ball_speed_y2,
+                                                     self.power_ups)
+        # collision ball/blocks
+        self.ball_velocity2 = brick.brick_collision(self.ball2, self.ball_velocity2[0],
+                                                    self.ball_velocity2[1], self.stage[0])
+        # left wall collision
+        self.ball_velocity2[0] *= ball.left_wall_collision(self.ball2)
+        # right wall collision
+        self.ball_velocity2[0] *= ball.right_wall_collision(self.ball2)
+        # upper wall collision
+        self.ball_velocity2[1] *= ball.upper_wall_collision(self.ball2)
+        # death point - (collision ball/wall down)
+        self.ball_velocity2 = ball.lower_wall_collision_mult(self.ball2, self.ball_velocity2,
+                                                        self.ball_speed_x2, self.ball_speed_y2)
+
+        # Ball 3
+
+        ball.move_ball(self.ball3, -self.ball_velocity3[0], self.ball_velocity3[1]-1)
+        self.ball_velocity3 = ball.paddler_collision(self.ball3, self.ball_velocity3, paddler,
+                                                     self.ball_speed_x3, self.ball_speed_y3,
+                                                     self.power_ups)
+        # collision ball/blocks
+        self.ball_velocity3 = brick.brick_collision(self.ball3, self.ball_velocity3[0],
+                                                    self.ball_velocity3[1], self.stage[0])
+        # left wall collision
+        self.ball_velocity3[0] *= ball.left_wall_collision(self.ball3)
+        # right wall collision
+        self.ball_velocity3[0] *= ball.right_wall_collision(self.ball3)
+        # upper wall collision
+        self.ball_velocity3[1] *= ball.upper_wall_collision(self.ball3)
+        # death point - (collision ball/wall down)
+        self.ball_velocity3 = ball.lower_wall_collision_mult(self.ball3, self.ball_velocity3,
+                                                        self.ball_speed_x3, self.ball_speed_y3)
 
     # Drawing the screen and its factors
     def draw(self):
@@ -167,6 +225,9 @@ class EldenBlocks:
 
         # draw ball
         ball.draw_ball(self.screen, self.ball)
+        if conf.power_mult:
+            ball.draw_ball(self.screen, self.ball2)
+            ball.draw_ball(self.screen, self.ball3)
         # draw paddler
         all_sprite.draw(self.screen)
         all_sprite.update()
