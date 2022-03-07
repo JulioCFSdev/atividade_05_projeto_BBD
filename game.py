@@ -157,8 +157,6 @@ class EldenBlocks:
             self.score += 5
         elif money_condition > 1:
             self.score += 10
-        if self.score > 0:
-            conf.power_mult = True
 
         self.stage = brick.next_stage()
 
