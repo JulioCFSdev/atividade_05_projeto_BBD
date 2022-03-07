@@ -121,7 +121,7 @@ class EldenBlocks:
                                                     self.ball_speed_x, self.ball_speed_y, self.power_ups)
         # collision ball/blocks
         self.ball_velocity = brick.brick_collision(self.ball, self.ball_velocity[0],
-                                                   self.ball_velocity[1], self.stage[0])
+                                                   self.ball_velocity[1], self.stage[0], self.power_ups, self.power_ups)
         # left wall collision
         self.ball_velocity[0] *= ball.left_wall_collision(self.ball)
         # right wall collision

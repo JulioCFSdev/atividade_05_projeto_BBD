@@ -48,6 +48,8 @@ class Config:
         self.blue = (63, 72, 204)
         self.green = (85, 212, 54)
         self.yellow = (255, 242, 0)
+        self.orange = (255, 127, 39)
+        self.gray = (88, 88, 88)
         # Ball dimension values
         self.ball_width = 20
         self.ball_heigth = 20
@@ -77,7 +79,7 @@ class Config:
         # Player position
         self.actual = 0
         # Player dimension values
-        self.player_width = 110
+        self.player_width = 180
         self.player_heigth = 20
         # Player initial coordinates values
         self.player_x = 390
@@ -101,4 +103,3 @@ class Config:
         self.powerup = 1
 
         self.size = 5
-

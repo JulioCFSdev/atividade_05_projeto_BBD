@@ -50,6 +50,17 @@ def lower_wall_collision(ball, velocity, speedx, speedy):
             return [speedx, speedy]
     else:
         return velocity
+def lower_wall_collision_mult(ball, velocity, speedx, speedy):
+    if ball.y + conf.tresh_lower_wall > conf.screen_height:
+        ball.x = 2000
+        ball.y = 2000
+
+        if velocity[0] > 0:
+            return [0, 0]
+        else:
+            return [0, 0]
+    else:
+        return velocity
 
 
 # upper wall collision
@@ -62,7 +73,6 @@ def upper_wall_collision(ball):
 
 def paddler_collision(ball, velocity, paddler, speedx, speedy, power_growth):
     if power_growth[0]:
-        print("CACAU")
         # velocity A left
         if paddler.rect.x < ball.x < paddler.rect.x + 40*1.5 and \
                 paddler.rect.y + 60 < ball.y + conf.player_heigth < paddler.rect.y + 65:

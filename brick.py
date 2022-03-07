@@ -8,6 +8,7 @@ conf = config.Config()
 power_up_sprites = pygame.sprite.Group()
 powerups = []
 
+
 # Create the wall blocks stage 1
 def create_stage_1():
     for row in range(conf.row_bricks_1):
@@ -67,7 +68,7 @@ def create_stage_2():
             elif row == 5:
                 block_type = 1
             elif row == 4:
-                block_type == 3
+                block_type = 3
             else:
                 block_type = 2
 
@@ -105,7 +106,7 @@ def create_stage_3():
             elif row == 5:
                 block_type = 1
             elif row == 4:
-                block_type == 3
+                block_type = 3
             else:
                 block_type = 2
 
@@ -129,11 +130,35 @@ def create_boss_fight():
             block_x = col * conf.block_width + 20
             block_y = row * conf.block_height + 115
 
-            score = 5
+            if row == 0 and col == 3:
+                block_type = 4
+            elif row == 1 and col == 1:
+                block_type = 4
+            elif row == 2 and col == 8:
+                block_type = 4
+            elif row == 3 and col == 17:
+                block_type = 4
+            elif row == 4 and col == 14:
+                block_type = 4
+            elif row == 5 and col == 1:
+                block_type = 4
+            elif row == 6 and col == 9:
+                block_type = 4
+            elif row == 7 and col == 11:
+                block_type = 4
+            elif row == 8 and col == 2:
+                block_type = 4
+            elif row == 9 and col == 15:
+                block_type = 4
+            else:
+                block_type = 5
+            
+            if block_type == 4:
+                block_life = 1
+            else:
+                block_life = 999
 
-            # Determining block types
-            block_type = 0
-            block_life = 1
+            score = 5
 
             block = pygame.Rect(block_x, block_y, conf.block_width, conf.block_height)
             conf.block_individual_boss = [block, score, block_type, block_life]
@@ -155,20 +180,23 @@ def draw_bricks(screen):
         if block[3] == 1:
             if block[2] == 3:
                 color = conf.blue
-            else:
+            elif block[2] == 0:
                 color = conf.yellow
+            else:
+                color = conf.orange
         elif block[3] == 2:
             color = conf.green
         elif block[3] == 3:
             color = conf.red
-        else:
-            color = conf.white
+        elif block[3] > 3:
+            color = conf.gray
+
         pygame.draw.rect(screen, color, block[0])
         pygame.draw.rect(screen, conf.black, (block[0]), 1)
 
 
 # brick colission function
-def brick_collision(ball, velocity_0, velocity_1, stage):
+def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra):
     n = 0
     conf.money_up = 0
 
@@ -189,7 +217,13 @@ def brick_collision(ball, velocity_0, velocity_1, stage):
         wall_block = conf.block_list_boss
 
     for block in wall_block:
-        if conf.power_gyro and ball.colliderect(block[0]):
+        if conf.stage == 4 and ball.colliderect(block[0]):
+            velocity_1 *= -1
+            if block[2] == 4:
+                for x in range(len(wall_block) - 18, len(wall_block) -1):
+                    wall_block.remove(wall_block[x])
+
+        if power_gyro[2] and ball.colliderect(block[0]):
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 *= -1
             # bottom collision
@@ -207,14 +241,14 @@ def brick_collision(ball, velocity_0, velocity_1, stage):
             elif block[2] == 1:
                 conf.money_up = 2
             elif block[2] == 2:
-                conf.money_up == 3
-            
+                conf.money_up = 3
+
             wall_block.remove(block)
             conf.all_bricks -= 1
 
 
-        elif conf.power_ultra and ball.colliderect(block[0]):
-            block[3] = 1
+        elif power_ultra[3] and ball.colliderect(block[0]):
+
             # checking the collision side
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 = velocity_1
@@ -233,10 +267,10 @@ def brick_collision(ball, velocity_0, velocity_1, stage):
             elif block[2] == 1:
                 conf.money_up = 2
             elif block[2] == 2:
-                conf.money_up == 3
+                conf.money_up = 3
 
-                wall_block.remove(block)
-                conf.all_bricks -= 1
+            wall_block.remove(block)
+            conf.all_bricks -= 1
 
 
         elif ball.colliderect(block[0]):
@@ -252,7 +286,6 @@ def brick_collision(ball, velocity_0, velocity_1, stage):
             # left collision
             elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                 velocity_0 *= -1
-
 
             if block[2] == 3:
                 powerup = PowerUp(block[0].x, block[0].y)
@@ -285,5 +318,5 @@ def next_stage():
     if conf.stage_clear == True:
         conf.stage_clear = False
         return [conf.stage, True]
-        
+
     return [conf.stage, conf.stage_clear]
