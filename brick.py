@@ -8,6 +8,7 @@ conf = config.Config()
 power_up_sprites = pygame.sprite.Group()
 powerups = []
 
+
 # Create the wall blocks stage 1
 def create_stage_1():
     for row in range(conf.row_bricks_1):
@@ -188,7 +189,7 @@ def draw_bricks(screen):
 
 
 # brick colission function
-def brick_collision(ball, velocity_0, velocity_1, stage):
+def brick_collision(ball, velocity_0, velocity_1, stage, power_gyro, power_ultra):
     n = 0
     conf.money_up = 0
 
@@ -209,7 +210,7 @@ def brick_collision(ball, velocity_0, velocity_1, stage):
         wall_block = conf.block_list_boss
 
     for block in wall_block:
-        if conf.power_gyro and ball.colliderect(block[0]):
+        if power_gyro[2] and ball.colliderect(block[0]):
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
                 velocity_1 *= -1
             # bottom collision
@@ -228,12 +229,12 @@ def brick_collision(ball, velocity_0, velocity_1, stage):
                 conf.money_up = 2
             elif block[2] == 2:
                 conf.money_up = 3
-            
+
             wall_block.remove(block)
             conf.all_bricks -= 1
 
 
-        elif conf.power_ultra and ball.colliderect(block[0]):
+        elif power_ultra[3] and ball.colliderect(block[0]):
 
             # checking the collision side
             if abs(block[0].y - (ball.y + conf.ball_heigth)) < 5 and velocity_1 > 0:
@@ -273,7 +274,6 @@ def brick_collision(ball, velocity_0, velocity_1, stage):
             elif abs((block[0].x + conf.block_width) - ball.x) < 5 and velocity_0 < 0:
                 velocity_0 *= -1
 
-
             if block[2] == 3:
                 powerup = PowerUp(block[0].x, block[0].y)
                 powerups.append(powerup)
@@ -305,5 +305,5 @@ def next_stage():
     if conf.stage_clear == True:
         conf.stage_clear = False
         return [conf.stage, True]
-        
+
     return [conf.stage, conf.stage_clear]
